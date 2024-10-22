@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace, commath}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{Wspólna praca domowa z Analizy 2}
+\author{Gracjan Barski, album: 448189}
+\date{March 26, 2024}
+
+\begin{document}
+\maketitle
+\onehalfspacing
+\textbf{Rozwiązanie:}
+\begin{enumerate}[(a)]
+    \item Dla każdego $x \in \R$, $F(x)$ jest poprawnie określona. \\[5pt]
+    W mianowniku nigdy nie występuje 0: $\Forall_{n \in \N} \; \Forall_{x\in\R} \; 2^n + x^2 > 0$. \\[5pt]
+    Oraz szereg funkcyjny dla każdego $x \in \R$ jest zbieżny: $\Forall_{x\in\R} \; \frac{1}{2^n + x^2} < \frac{1}{2^n}$. Jako że $\sum_{i = 0}^\infty \frac{1}{2^n}$ jest zbieżny, to z kryterium porównawczego $F(x)$ również zbieżny dla każdego $x \in \R$. \\[5pt]
+    Więc istotnie funkcja jest poprawnie określona $\R \to \R$.
+
+    \item Z poprzedniego podpunktu mamy już udowodnioną zbieżność punktową. Teraz weźmy pochodną wyrażenia z oryginalnej sumy i pokażmy, że szereg tych pochodnych jest jednostajnie zbieżny, otrzymujemy: \\[5pt]
+    $$\frac{d}{dx}\left(\frac{1}{2^n+x^2}\right) = \frac{-2x}{(2^n+x^2)^2}$$
+    Teraz rozważmy normę tej pochodnej:
+    $$\norm{\frac{-2x}{(2^n+x^2)^2}} \leq \norm{\frac{-2x}{2^n+x^2}} \leq \frac{1}{2^{\frac{n}{2}}}$$
+    Gdzie pierwsza nierówność wynika z tego, że $\Forall_{n \in \N} \; \Forall_{x\in\R} \; 2^n + x^2 \geq 1$, a druga wynika z przekształcenia wyrażenia $\Dis 0 \leq (2^{\frac{n}{2}} + x)^2$. \\[5pt]
+    Wiadomo, że $\sum_{i = 0}^\infty \frac{1}{2^{\frac{n}{2}}}$ jest zbieżny, więc wnioskujemy, że
+    $$\sum_{i = 0}^\infty \frac{-2x}{(2^n+x^2)^2}$$
+    jest jednostajnie zbieżny.Z twierdzenia VI.4 o różniczkowalności granicy (Uwaga 2.) wnioskujemy, że $F(x)$ jest różniczkowalna. \\[5pt]
+    Co więcej dla każdego $n \in \N$ funkcja $\frac{-2x}{(2^n+x^2)^2}$ jest ciągła, więc z twierdzenia VI.3 o ciągłości granicy (Uwaga 2.) wnioskujemy, że $F'(x)$ jest ciągła.
+
+    \newpage
+    \item Rozważmy rozwinięcie Taylora o środku $x_0 = 0$ dla $F(x)$:
+    $$F(x) = F(x_0) + F'(x_0)x + \frac{F''(x_0)}{2}x^2 + o(x^2)$$
+    $\Dis F(x_0) = \sum_{i = 0}^\infty \frac{1}{2^n + x_0^2} \overset{\mathrm{x_0 = 0}}{=} 2$ \\[5pt]
+    $\Dis F'(x_0) = \sum_{i = 0}^\infty \frac{-2x}{(2^n+x^2)^2} \overset{\mathrm{x_0 = 0}}{=} 0$ \\[5pt]
+    $\Dis \frac{F''(x_0)}{2} = \frac{1}{2}\sum_{i = 0}^\infty \frac{6x^4 + 2^{n+2}x^2 - 2^{2n+1}}{(4^n + 2^{n+1}x^2 + x^4)^2} \overset{\mathrm{x_0 = 0}}{=} \frac{1}{2} \sum_{i = 0}^\infty \frac{-2 \cdot 2^{2n}}{4^{2n}} = -\frac{4}{3}$ \\[5pt]
+    Mogliśmy wziąć drugą pochodną $F(x)$ w $x = 0$, ponieważ 
+    $$\lim_{x\to 0^-} F''(x) = \lim_{x\to 0^+} F''(x)$$
+    więc $F'(x)$ jest różniczkowalna w tym punkcie. \\[10pt]
+    Podstawiamy rozwinięcie Taylora za $F(x)$ do wyrażenia z treści:
+    $$\lim_{x \to 0} \frac{F(x) - 2}{x^2} = \lim_{x \to 0} \frac{2 - \frac{4}{3}x^2 + o(x^2) - 2}{x^2} \to - \frac{4}{3}$$ \qed
+\end{enumerate}
+\end{document}

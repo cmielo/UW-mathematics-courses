@@ -1,0 +1,104 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.3in}]{geometry}
+\pagestyle{empty}
+
+\usepackage{float}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{PMat - wspólna praca domowa seria IV}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\textbf{Zadanie 417:} \\[10pt]
+$\left\langle X, \leq \right\rangle$ dowolny porządek i dowolne $A, B \subseteq X$.
+\begin{enumerate}[(a)]
+    \item Stwierdzenie fałszywe. Kontrprzykład:
+    \begin{align*}
+        X &= \Q \\ 
+        \leq &= \leq_0 \\
+        A &= \{x \in \Q \mid 0 \leq x < \sqrt{2} \} \\
+        B &= \{x \in \Q \mid 0 \leq x \leq 2 \}
+    \end{align*}
+    Gdzie $\leq_0$ oznacza "standardową" relację nierówności. \\
+    Jasnym jest, że $\sup(A \cup B) = 2$, jednak $\sup A$ nie istnieje. \\[5pt]
+    $\leq_0$ już jest liniowy więc liniowość tego porządku nic nie zmienia.
+    
+    \item Stwierdzenie fałszywe. Kontrprzykład:
+    \begin{align*}
+        X &= \N \\ 
+        \leq &= \mathbf{1}_\N \\
+        A &= \{1\} \\
+        B &= \{2\}
+    \end{align*}
+    $\mathbf{1}_\N$ trywialnie jest porządkiem częściowym. \\
+    Jasnym jest, że $\sup A = 1$ oraz $\sup B = 2$, jednak $\sup(A \cup B)$ nie istnieje ponieważ elementy $1, 2$ są porównywalne tylko same ze sobą, więc nie istnieje żaden element "większy" od obu z nich. \\[10pt]
+    Jednak jeśli $\leq$ ma być liniowe to zdanie będzie prawdziwe. \\
+    Oznaczmy $\sup A = a$, $\sup B = b$. WLOG $a \geq b$, wtedy wiemy że:
+    $$\Forall_{x \in A} \; x \leq a \hspace{10pt} \land \hspace{10pt} \Forall_{y \in B} \; y \leq a$$
+    Więc $a$ jest ograniczeniem górnym $A \cup B$. Jednak znalezienie mniejszego ograniczenia nie jest możliwe, ponieważ $a$ było już supremum $A$, a w wyniku operacji sumowania zbiorów, nic z nich nie ubyło, więc nie da się zmniejszyć kresu. Więc $\sup (A \cup B) = a$.
+
+    \item Stwierdzenie prawdziwe. Oznaczmy $\sup A = a$, $\sup B = b$, $\sup (A \cup B) = c$, $\sup\{ a, b \} = d$. \\[5pt]
+    Z definicji $d$, wiemy że $a \leq d \land b \leq d$. \\[5pt]
+    Z definicji $a$, wiemy że: $\Forall_{x \in A} \; x \leq a$. \\[5pt]
+    Z przechodniości relacji $\leq$, mamy: $\Forall_{x \in A} x \leq d$. \\[5pt]
+    Poprzez analogiczne rozumowanie dla $B$ otrzymujemy fakt, że $d$ jest ograniczeniem górnym $A \cup B$. Jeśli $d$ byłoby najmniejszym możliwym ograniczeniem, to byłoby kresem, więc byłoby równe $c$ a to kończyłoby zadanie. W innym przypadku, jeśli byłoby nieporównywalne z $c$, to wtedy w ogóle założenia zadania nie są spełnione bo $\sup (A \cup B)$ nie istniałoby (ponieważ kres nie byłby jednoznacznie określony). Dlatego teraz załóżmy, że $d$ nie jest najmniejszym możliwym kresem, to znaczy $c \leq d$. \\[5pt]
+    Wtedy istnieje jakieś $e$, które jest ograniczeniem górnym $A \cup B$ spełniające $e \leq d$. Jednak wtedy nie zachodzi $(a \leq e \land b \leq e)$, ponieważ jeśli by zachodziło to wtedy $d$ nie byłoby kresem $\{a, b\}$. Więc $e$ nie jest ograniczeniem górnym któregoś ze zbiorów $A, B$, więc nie jest też ograniczeniem $A \cup B$, co prowadzi do sprzeczności (ponieważ $e$ miało być ograniczeniem tej sumy), więc takie $e$ nie istnieje. Z tego wnioskujemy, że $d$ jest najmniejszym ograniczeniem górnym $A \cup B$, więc $c = d$. \\[10pt]
+    Jeśli $\leq$ ma być liniowy to nic się nie zmienia. \qed
+\end{enumerate}
+
+\textbf{Zadanie 433:} \\[10pt]
+$r$ porządek częściowy na $A$. $f \colon A \xrightarrow{\text{bij}} A$. $g \colon A \times A \to A \times A$. $g(x, y) = \langle f(x), f(y) \rangle$.
+\begin{enumerate}[(a)]
+    \item $g(r) \subseteq r \Longleftrightarrow f$ jest monotoniczna ze względu na porządek $r$. \\[10pt]
+    $(\Longrightarrow)$ Weźmy dowolne $x, y \in A$ takie że $x \; r \; y$. Z definicji $g$, wiemy że $\langle f(x), f(y) \rangle \in g(r)$. Ale wiemy że $g(r) \subseteq r$, więc z definicji inkluzji zbiorów mamy $f(x) \; r \; f(y)$, więc $f$ jest monotoniczna ze względu na porządek $r$. \\[10pt]
+    $(\Longleftarrow)$ Weźmy dowolne $x, y \in A$ takie że $x \; g(r) \; y$ \textbf{(1)}, oraz weźmy $a, b \in A$ takie że $f(a) = x$ oraz $f(b) = y$. Takie $a, b$ istnieją, ponieważ $x, y$ należą do obrazu funkcji. Z definicji $g(r)$ oraz z \textbf{(1)} wiemy że $a \; r \; b$, a z monotoniczności $f$ mamy $f(a) \; r \; f(b)$ czyli $x \; r \; y$, więc istotnie $g(r) \subseteq r$. \\[5pt]
+    Czyli $f$ może być dowolna, nie musi być bijekcją.
+    
+    \item $r \subseteq g(r) \Longleftrightarrow \Forall_{x, y \in A} \; (f(x) \; r \; f(y) \Longrightarrow x \; r \; y)$ \\[10pt]
+    $(\Longrightarrow)$ Weźmy dowolne $x, y \in A$ takie że $f(x) \; r \; f(y)$. Z inkluzji $r \subseteq g(r)$ mamy $\langle f(x), f(y) \rangle \in g(r)$. Ale teraz z faktu, że $f$ jest iniekcją (musi być ponieważ moglibyśmy dostać $x'$ i $y'$ takie że $\langle x', y' \rangle \notin r$) i z definicji $g(r)$ mamy $x \; r \; y$, więc zachodzi $\Forall_{x, y \in A} \; (f(x) \; r \; f(y) \Longrightarrow x \; r \; y)$.  \\[10pt]
+    $(\Longleftarrow)$ Weźmy dowolne $x, y \in A$ takie że $x \; r \; y$, oraz weźmy $a, b \in A$ takie że $f(a) = x$ oraz $f(b) = y$. Takie $a, b$ istnieją  ponieważ $f$ jest surjekcją. Teraz z założenia $x \; r \; y$ mamy $f(a) \; r \; f(b)$, a to z warunku po prawej stronie oryginalnej równoważności daje $a \; r \; b$. Z definicji $g$, wiemy że $\langle f(a), f(b) \rangle \in g(r)$, a to z definicji $a, b$ daje: $\langle x, y \rangle \in g(r)$, więc istotnie $r \subseteq g(r)$. \qed \\[5pt]
+    W tym podpunkcie założenie, że $f$ jest bijekcją było istotne
+    
+    
+\end{enumerate}
+
+\textbf{Zadanie 594:} \\[10pt]
+Jakiej mocy jest zbiór wszystkich łańcuchów? (Oznaczmy go $X$)
+\begin{enumerate}[(a)]
+    \item W zbiorze $\N - \{0\}$ uporządkowanym przez relację podzielności. \\[10pt]
+    Wiemy że $|X| \leq \cont$, ponieważ wszystkich łańcuchów jest na pewno mniej niż wszystkich podzbiorów liczb naturalnych bez $0$ (chociażby dlatego, że podzbiór $\{2, 3\}$ nie jest łańcuchem), a zbiór wszystkich podzbiorów $\N - \{0\}$ ma moc $\cont$. Teraz znaleźć dolne ograniczenie i będzie gotowe. \\[5pt]
+    Weźmy nieskończony zbiór $P = \{2^n \mid n \in \N \}$ składający się z kolejnych naturalnych potęg dwójki. Jego moc to $\aleph_0$, ponieważ istnieje bijekcja $f \colon P \to \N$, określona $f(n) = \log_2(n)$. Wszystkie elementy w nim są postaci $2^p$ dla pewnego $p \in \N$. Biorąc dwa dowolne różne elementy $2^k, 2^l \in P$ dla $k, l \in \N$ $(k \neq l)$, zachodzi $2^k \mid 2^l$ lub $2^l \mid 2^k$. Więc wszystkie elementy są porównywalne ze sobą nawzajem, więc istotnie każdy podzbiór $P$ jest łańcuchem w tym porządku. Z tego, że $|P| = \aleph_0$, otrzymujemy $|\Pows (P)| = \cont$. Więc łańcuchów które są podzbiorami $P$ jest $\cont$, ale tych łańcuchów w $X$ jest więcej (chociażby $\{3, 9\}$), więc $|X| \geq \cont$. \\[5pt]
+    Z twierdzenia Cantora-Bernsteina otrzymujemy $|X| = \cont$.
+
+    \item W zbiorze słów nad alfabetem $\{a, b\}$ uporządkowanym prefiksowo. \\[10pt]
+    Wiadomo, że $X \subseteq \Pows(\{a, b\}^*)$. Z wykładu wiadomo, że $|\{a, b\}^*| = \aleph_0$, więc $|\Pows(\{a, b\}^*)| = \cont$, więc $|X| \leq \cont$. Teraz rozważmy zbiór $A$ zdefiniowany następująco:
+    \begin{align*}
+        \epsilon \in A \\
+        w \in A \Longrightarrow w \cdot a \in A
+    \end{align*}
+    Gdzie $\cdot$ oznacza konkatenację słów. Teraz weźmy dowolne dwa różne elementy $A$, oczywiście jeden z nich jest prefiksem drugiego (ponieważ składają się z samych $a$ lub element jest pusty i są różnej długości). Analogiczne rozumowanie wykazuje, że dowolny podzbiór $A$ jest łańcuchem. Oczywiście $A \sim \N$ (prosta bijekcja $f\colon A \to \N$, gdzie $f(w) = |w|$), więc $|A| = \N$. Wiemy że każdy podzbiór $A$ jest łańcuchem, a skoro $A$ to tych łańcuchów jest $\cont$, ale łańcuchów w $X$ jest więcej niż tylko te złożone z elementów z $A$ (na przykład $\{a, ab\}$), więc $|X| \geq \cont$.
+    Z twierdzenia Cantora-Bernsteina otrzymujemy $|X| = \cont$.
+
+    \item W zbiorze słów nad alfabetem $\{a, b\}$ uporządkowanym leksykograficznie. \\[10pt]
+    Tutaj wszystko działa jak w podpunkcie (b), tak samo wszystkie podzbiory $A$ są łańcuchami w tym porządku (ponieważ elementy składają się z samych $a$ lub element jest pusty i są różnej długości), więc tutaj również $|X| = \cont$.
+\end{enumerate} 
+\end{document}

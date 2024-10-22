@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace, commath}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{Wspólna praca domowa z Analizy 2}
+\author{Gracjan Barski, album: 448189}
+\date{23 March, 2024}
+
+\begin{document}
+\maketitle
+\onehalfspacing
+\textbf{Rozwiązanie:} \\[5pt]
+Warunek z zadania przekształcamy do postaci:
+$$\Exists_{c \in \R} \; \Forall_{x, y \in D} \; \frac{|f(x) - f(y)|}{||x - y||} \leq c$$
+Przy założeniu $x \neq y$. Jeśli $x = y$ to mamy $0 \leq 0$ i jest OK. \\[5pt]
+Trzeba pokazać, że zbiór
+$$X = \left\{ \frac{|f(x) - f(y)|}{||x - y||} : x, y \in D \land x \neq y \right\}$$
+jest ograniczony z góry. Wnioskujemy, że jeśli wszystkie pochodne cząstkowe istnieją we wszystkich punktach $D$ i są ograniczone, to $f$ jest ciągła. Ponadto, $D$ jest zbiorem zwartym, więc $f$ jest również ograniczona. Więc dla każdego $x, y \in D$, $|f(x) - f(y)|$ jest wartością skończoną, tak samo jak $||x - y||$. \\[5pt]
+Teraz wystarczy rozważyć co się dzieje, jeśli (WLOG) $y \to x$. \\[5pt]
+Rozważmy wektor $v = y - x$. Wtedy badane wyrażenie można zapisać:
+$$\frac{|f(x + v) - f(x)|}{||v||}$$
+Interesuje nas granica
+$$\lim_{h \to 0} \frac{|f(x + hv) - f(x)|}{h||v||}$$
+Czyli $\partial_{\Vec{v}}f(x)$. Wiemy, że jeśli funkcja posiada w danym punkcie pochodne cząstkowe, to jej pochodna kierunkowa wyraża się wzorem:
+$$\nabla f(x) \cdot \frac{\Vec{v}}{||\Vec{v}||}$$
+Gdzie $\cdot$ oznacza standardowy iloczyn skalarny. Jako że każda z pochodnych cząstkowych w $\nabla f(x)$ istnieje, to powyższy iloczyn skalarny ma skończoną wartość. Więc pochodne kierunkowe dla każdego $x \in D$ w dowolnym kierunku istnieją i są skończonymi wartościami. Więc istotnie $X$ jest ograniczony, co dowodzi tezy. \qed
+
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+    
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PowS}{\mathcal{P}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+\begin{center}
+{\bf Zadanie 1 z Analizy Matematycznej dla Informatyków \\ {\em czwartek, 9 XI --- czwartek, 16 XI  2023}}\\
+\textsc{Autor rozwiązania: Gracjan Barski, indeks: 448189, grupa 2} \textbf{BEZ}
+\end{center}
+
+Znajdź granicę ciągu $a=\left\{a_n\right\}_{n\geq1}$, lub wykaż, że granica nie 
+istnieje, jeżeli $a$  jest zadany wzorem:
+$$a_n=\left(\frac{999}{1000}+\frac{n^{(1000^{999})}}{\left(\frac{1000}{999}\right)^n}\right)^n, \quad n\in\N.$$
+\textbf{Rozwiązanie}:
+Przeprowadźmy szereg przekształceń:
+\begin{align*}
+    a_n &= \left(\frac{999}{1000}+\frac{n^{(1000^{999})}}{\left(\frac{1000}{999}\right)^n}\right)^n \\
+    &= \left(\frac{999}{1000}+\left(\frac{999}{1000}\right)^n \cdot n^{(1000^{999})}\right)^n \\
+    &= \left(\frac{999}{1000}\right)^n \cdot \left(1+\left(\frac{999}{1000}\right)^{n-1} \cdot n^{(1000^{999})}\right)^n \\
+    &= \left(\frac{999}{1000}\right)^n \cdot \alpha_n
+\end{align*}
+Gdzie $\alpha_n = \left(1+\left(\frac{999}{1000}\right)^{n-1} \cdot n^{(1000^{999})}\right)^n$ \\[5pt]
+Teraz rozważmy granicę ciągu $\alpha_n$; przekształćmy go:
+\begin{align*}
+    \alpha_n &= \left(1+\left(\frac{999}{1000}\right)^{n-1} \cdot n^{(1000^{999})}\right)^n \\
+    &=  \left(1 + \frac{n^{(1000^{999})}}{\left(\frac{1000}{999}\right)^{n-1}}\right)^n \\
+    &= \left(1 + \frac{1}{\frac{\left(\frac{1000}{999}\right)^{n-1}}{n^{(1000^{999})}}}\right)^n \\
+\end{align*}
+Teraz oznaczmy: 
+\begin{align*}
+\beta_n &= \frac{\left(\frac{1000}{999}\right)^{n-1}}{n^{(1000^{999})}}
+\end{align*}
+Oraz:
+\begin{align*}
+\gamma_n &= \frac{n}{\beta_n}
+\end{align*}
+A następnie przekształćmy:
+$$\alpha_n = \left[\left(1 + \frac{1}{\beta_n}\right)^{\beta_n}\right]^{\gamma_n}$$
+Zastanówmy się, co dzieje się z $\beta_n$, gdy $n \to \infty$. \\[5pt]
+Rozważmy granicę ciągu postaci: $\displaystyle\frac{a^n}{n^b}$, gdzie $a, b \in \R$ oraz $a, b > 1$, takim ciągiem jest $\beta_n$, a gamma jest odwrotnością takiego ciągu $\gamma_n$. Oznaczmy granicę tego ciągu jako $L$\\[5pt]
+Weźmy pierwiastek $b$-tego stopnia z wyrazów tego ciągu, otrzymamy: $\frac{\left(a^{1/b}\right)^n}{n}$, granica tego ciągu jest równa $L^{\frac{1}{b}}$ (Z twierdzenia które było dowodzone na ćwiczeniach). \\[5pt]
+Oznaczmy $c = a^{\frac{1}{b}}$. Wtedy wystarczy obliczyć granicę $\frac{c^n}{n}$. Weźmy $c = d + 1$. Jasnym jest że $c > 1$, więc $d > 0$. Wtedy ze wzoru Newtona, dla $n \geq 2$ mamy:
+$$c^n = (d+1)^n \geq 1 + {n \choose 1} d + {n \choose 2} d^2 = 1 + n\cdot d + \frac{1}{2} n \cdot (n - 1) \cdot d^2 > \frac{1}{2} n \cdot (n - 1) \cdot d^2$$
+Więc z tego mamy:
+$$\frac{c^n}{n} > \frac{\frac{1}{2} n \cdot (n - 1) \cdot d^2}{n} = \frac{1}{2} (n - 1) \cdot d^2$$
+Czyli mamy dolne ograniczenie, które ma granicę w nieskończoności (bo $d \neq 0)$, a to oznacza, że ciąg po lewej stronie również ma granicę w nieskończoności, czyli $L^{\frac{1}{b}} = \infty$, co implikuje $L = \infty$ \\[5pt]
+Teraz wróćmy do naszych ciągów $\beta_n$ i $\gamma_n$; właśnie udowodniliśmy, że:
+$$\beta_n \to \infty$$
+Oraz jako że $\gamma_n$ jest odwrotnością ciągu postaci $\displaystyle\frac{a^n}{n^b}$, (gdzie $a, b \in \R$ oraz $a, b > 1$), to analogiczny dowód jak powyżej pokaże, że 
+$$\gamma_n \to 0$$
+Wróćmy do ciągu $\alpha_n$:
+$$\alpha_n = \left[\left(1 + \frac{1}{\beta_n}\right)^{\beta_n}\right]^{\gamma_n}$$
+Z tego co pokazaliśmy wyżej, widać że wyrażenie w środku nawiasu kwadratowego dąży do stałej $e$, a wykładnik $\gamma_n$ dąży do $0$, więc całość  $\alpha_n \to 1$. \\[5pt]
+Wróćmy do głównego ciągu $a_n = \left(\frac{999}{1000}\right)^n \cdot \alpha_n$. Z oczywistych względów $\left(\frac{999}{1000}\right)^n \to 0$, więc z operacji arytmetycznych na granicach mamy:
+$$a_n \to 0 \cdot 1 = 0$$
+\qed
+\end{document}

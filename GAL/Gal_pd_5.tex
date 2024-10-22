@@ -1,0 +1,51 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{GAL - praca domowa 5. z dnia 5.12.2023}
+\author{Gracjan Barski, album: 448189}
+\date{December 10, 2023}
+
+\begin{document}
+\maketitle
+\onehalfspacing
+\textbf{Rozwiązanie:} \\[10pt]
+Mamy macierze $A, B \in R^{n,n}$. Zachodzi $\ker A \cap \, \mathrm{im} \, B = \{0\}$. 
+\begin{enumerate}[a)]
+    \item $\ker (AB) = \ker B$. Prosty dowód przez wzajemną inkluzję: \\[5pt]
+    $(\subseteq)$ Kontrapozycja: Weźmy dowolny wektor $x \notin \ker B$. Wystarczy pokazać $x \notin \ker (AB)$. Jeśli $x \notin \ker B$ to wtedy $Bx \neq 0$. Wiemy też, że $Bx \in \mathrm{im} B$, a z założenia że $\ker A$ i $\mathrm{im} \, B$ mają tylko jeden wspólny element $0$, to otrzymujemy $Bx \notin \ker A$, a wtedy $ABx \neq 0$. Z tego wnioskujemy $x \notin \ker (AB)$. \\[5pt]
+    $(\supseteq)$ Weźmy dowolny wektor $x \in \ker B$, wtedy $Bx = 0$. Wiemy że $0 \in \ker A$ (bo 0 należy do jądra każdej macierzy), więc $Bx \in \ker A$, więc $ABx = 0$, a z tego wnioskujemy $x \in \ker (AB)$ \\[5pt]
+    Z wzajemnej inkluzji wnioskujemy równość $\ker (AB) = \ker B$.
+
+    \item $\mathrm{im} \; ((AB)^T) = \mathrm{im} \; (B^T)$. Najpierw pokażę inkluzję w prawą stronę:\\[5pt]
+    $(\subseteq)$ Przepiszmy inaczej: $\mathrm{im} \; ((AB)^T) = \mathrm{im} \; (B^TA^T)$  Weźmy dowolny wektor $x \in \mathrm{im} \; (B^TA^T)$. Z definicji to oznacza:
+    $$\Exists_{y_0 \in \R^n} \; x = B^TA^Ty_0$$
+    Teraz oznaczmy $A^Ty_0 = z \in \R^n$ (bo $A \in \R^{n,n}$), więc wyrażenie przyjmuje postać:
+    $$x = B^Tz \in \mathrm{im} \; (B^T)$$
+    Więc inkluzja udowodniona. \\[5pt]
+    Teraz pokażę równość wymiarów tych obrazów macierzy: Z twierdzenia o rzędzie mamy:
+    \begin{align*}
+        \mathrm{rank} \; B^T + \mathrm{dim \; ker} \; B^T &= n \\
+        \mathrm{rank} \; (AB)^T + \mathrm{dim \; ker} \; (AB)^T &= n \end{align*}
+    Ponieważ $B^T, (AB)^T \in \R^{n,n}$.
+    Z wykładu wiadomo również, że $\mathrm{rank} \; B = \mathrm{rank} \; B^T$. Znowu korzystając z twierdzenia o rzędzie, tym razem dla $B$, otrzymujemy $\mathrm{dim \; ker} \; B = \mathrm{dim \; ker} \; B^T$. \\
+    Analogicznie $\mathrm{dim \; ker} \; AB = \mathrm{dim \; ker} \; (AB)^T$. Korzystając z rezultatu z podpunktu a), otrzymujemy:
+    $$\mathrm{dim \; ker} \; B^T = \mathrm{dim \; ker} \; B = \mathrm{dim \; ker} \; AB = \mathrm{dim \; ker} \; (AB)^T$$
+    Więc istotnie wymiary obrazów są takie same, oraz jeden z nich zawiera się w drugim, a to ze Stwierdzenia 6.13 oznacza, że $\mathrm{im} \; ((AB)^T) = \mathrm{im} \; (B^T)$. \qed
+\end{enumerate}
+\end{document}

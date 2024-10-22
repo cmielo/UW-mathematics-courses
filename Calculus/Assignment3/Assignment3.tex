@@ -1,0 +1,41 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{{\bf Zadanie 3 z Analizy Matematycznej dla Informatyków }}
+\author{Gracjan Barski, album: 448189}
+\date{January 9, 2024}
+
+\begin{document}
+\maketitle
+\textbf{Rozwiązanie:}
+\begin{enumerate}[(a)]
+    \item Z definicji granicy mamy:
+    $$\Forall_{\epsilon > 0} \Exists_{N_1 \in \R} \Forall_{x \in \R} \; (x < N_1 \Longrightarrow |g(x) - 7| < \epsilon) $$
+    $$\Forall_{\epsilon > 0} \Exists_{N_2 \in \R} \Forall_{x \in \R} \; (x > N_2 \Longrightarrow |g(x) - 7| < \epsilon )$$
+    Wybierzmy $\epsilon = 0.001$ i dla tego epsilona weźmy odpowiednie $N_1, N_2 \in \R$ spełniające powyższe warunki.
+    Rozważmy przedział $[N_1; N_2]$. Funkcja $g$ jest ciągła, więc z twierdzenia Weierstressa o osiąganiu kresów, wiemy że istnieje $M \in [N_1; N_2]$ takie że $g(M) = \sup g([N_1; N_2])$. \\[5pt]
+    Rozważmy wartość $3e$: Wiemy że $e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n$, oraz że ciąg $a_n = \left(1 + \frac{1}{n}\right)^n$ jest rosnący. Dla $n = 5$ mamy $3 \cdot a_5 = 3 \cdot 1.2^5 = 3 \cdot 2.48832 = 7.46496 > 7$. Więc $3e$ jest większe od $7$ o co najmniej $0.46496$. \\[5pt]
+    Wracając do rozważań o przedziale $[N_1; N_2]$, wiemy, że istnieje $M$, dla którego $g(M) = \sup g([N_1; N_2])$. Wiemy również, że $g(17) = 3e$, więc $g(M) \geq 3e$. Oczywiście zachodzi $N_1 < 17, M < N_2$. Jako że jeśli $x \in (-\infty; N_1) \cup (N_2; \infty)$ to wartość $g(x)$ różni się od 7 o co najwyżej 0.001 (epsilon wybrany na początku), czyli może być co najwyżej 7.001, to wiemy, że $g(M)$ jest największą wartością funkcji w całej dziedzinie $\R$.
+
+    \item Rozważmy funkcję $f(x) = g(x + \pi) - g(x)$. Warto zaznaczyć, że dziedzina $f$ to $\R$, oraz że $f$ jest ciągła (ponieważ jest różnicą dwóch funkcji ciągłych). Wystarczy pokazać, że $f$ posiada miejsce zerowe. Weźmy wartość $M$ z poprzedniego podpunktu. Wiemy, że $g(M)$ jest wartością największą w całej dziedzinie. Teraz rozważmy wartości funkcji $f$:
+    $$f(M) = g(M + \pi) - g(M) \leq 0$$
+    $$f(M - \pi) = g(M) - g(M - \pi) \geq 0$$
+    Gdzie nierówności wynikają z faktu, że $g(M)$ jest wartością największą. Teraz, jeśli $f(M) = 0$ lub $f(M - \pi) = 0$ to mamy tezę. Z drugiej strony, jeśli obie te wartości są niezerowe, to z własności Darboux dla funkcji ciągłych otrzymujemy, że istnieje $c \in (M - \pi; M)$ takie że $f(c) = 0$. \qed
+\end{enumerate}
+\end{document}

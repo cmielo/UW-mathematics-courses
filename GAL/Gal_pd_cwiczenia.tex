@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{GAL - praca domowa na ćwiczenia (grupy 2 i 3)}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+\begin{document}
+\maketitle
+% \onehalfspacing
+\textbf{Zadanie 1:} \\[10pt]
+Odpowiedź: Tak. \\[5pt]
+Uzasadnienie: Weźmy dowolną bazę przestrzeni $Y$, oczywiście posiada ona $n - 1$ wektorów. Oznaczmy te wektory $x_1, x_2, \ldots, x_{n-1}$. Teraz rozszerzmy tą bazę do bazy $X$ dodając jeden wektor $x_n$, który razem z bazą $Y$ tworzy układ liniowo niezależny. Można tak zrobić ponieważ $Y$ jest podprzestrzenią $X$ o wymiarze o 1 mniejszym. Teraz weźmy układ wektorów $(x_1, \ldots, x_{n - 1}, x_n)$ i weźmy bazę dualną (sprzężoną) do tej bazy: $(x_1^*, \ldots, x_{n - 1}^*, x_n^*)$. Nasz poszukiwany funkcjonał $x^* \in X^*$ to $x^* = x_n^*$. Czyli ten, który zwraca współczynnik który stoi przy $x_n$ w reprezentacji wektora jako suma przeskalowanych wektorów z bazy. Jeśli wektor należy do $Y$ to jego współczynnik przy $x_n$ będzie równy 0, więc się zgadza, a jeśli wektor będzie miał w rozkładzie wektor $x_n$ to znaczy, że nie należy do $Y$ (ponieważ $x_n \notin Y$), a funkcjonał zwróci wartość niezerową, a to jest pożądane zachowanie. Taki funkcjonał istnieje dla każdej podprzestrzeni $Y \subset X$ o wymiarze $n - 1$. \qed
+
+\vspace{20pt}
+
+\textbf{Zadanie 2:} \\[10pt]
+Odpowiedź: Nie \\[10pt]
+Uzasadnienie: Wiemy (Z podstaw matematyki) że wszystkich wielomianów w $\Q[x]$ jest $\aleph_0$. Teraz sprawdźmy kardynalność zbioru wszystkich funkcjonałów $(\Q[x])^*$. Chcielibyśmy znaleźć iniekcję $f \colon [0; 1) \to (\Q[x])^*$, wtedy $|(\Q[x])^*| \geq \cont$, więc będziemy wiedzieć, że te dwie przestrzenie liniowe nie są ze sobą izomorficzne, ponieważ nie spełniają kluczowego warunku na tą samą moc. \\[5pt]
+Weźmy dowolną liczbę rzeczywistą $x \in [0; 1)$. Zapiszmy $x$ jako rozwinięcie dziesiętne $x = 0,x_0x_1x_2x_3\ldots$, oraz zapiszmy wielomian $q \in \Q[x]$ jako $q = a_0 + a_1 x + a_2 + x^2 + \ldots$ Teraz rozważmy $f \colon [0; 1) \to (\Q[x])^*$ takie że:
+$$f(x)(q) = \sum_{k = 0}^{\deg q} x_i \cdot a_i$$
+Pokażmy, że $f$ jest iniekcją. Weźmy dwa dowolne $x, y \in [0; 1)$. Takie że $x \neq y$. Zapiszmy $x = 0,x_0x_1x_2x_3\ldots$ oraz $y = 0,y_0y_1y_2y_3\ldots$ Jeśli mają być różne, to $\Exists_i \; x_i \neq y_i$. Weźmy takie $i$ i rozważmy wielomian $q = a_i \cdot x^i$. Teraz przyłóżmy $f(x)$ oraz $f(y)$ do $q$. Dostajemy:
+\begin{align*}
+    f(x)(q) = a_i \cdot x_i \\
+    f(y)(q) = a_i \cdot y_i
+\end{align*}
+Jednak te wartości są różne (ponieważ $x_i \neq y_i$), więc przekształcenia funkcjonały $f(x), \; f(y)$ przyjmują różne wartości na tym samym argumencie, więc są różne. Co za tym idzie dowiedliśmy, że $f$ jest iniekcją, więc $|(\Q[x])^*| > |\Q[x]|$, więc te przestrzenie nie są ze sobą izomorficzne. \qed
+
+% \vspace{20pt}
+\newpage
+
+\textbf{Zadanie 3:} \\[10pt]
+Implikacje w obie strony: \\[5pt]
+$(\Longrightarrow)$ Załóżmy $\ker f \subseteq \ker g$. Wiemy, że istnieje przestrzeń liniowa $U$, taka że $Y = \mathrm{im} f \oplus U$. Wtedy każdy wektor $y \in Y$ może być jednoznacznie zapisany jako $y = i + u$, gdzie $i \in \mathrm{im} f$, $u \in U$. Można zapisać $i$ jako $i = f(x)$ dla pewnego $x \in X$ (aksjomat wyboru). Teraz rozważmy taką funkcję $h \colon Y \to Z$. Określoną wzorem:
+$$h(y) = h(f(x) + u) = g(x)$$
+Teraz wystarczy sprawdzić czy taka funkcja jest dobrze określona, to znaczy, czy wartość $h(y)$ będzie taka sama niezależnie od tego jakiego $x \in X$ wybierzemy do $f(x)$. \\[5pt]
+Rozważmy dowolne elementy $x_1, x_2 \in X$, takie że $f(x_1) = f(x_2)$, chcielibyśmy aby zachodziło również $g(x_1) = g(x_2)$. Przekształćmy założenie, otrzymujemy $f(x_1 - x_2) = 0$ (ponieważ $f$ to przekształcenie liniowe), więc $x_1 - x_2 \in \ker f$, ale $\ker f \subseteq \ker g$, więc $g(x_1 - x_2) = 0$, a z tego $g(x_1) = g(x_2)$ (ponieważ $g$ to przekształcenie liniowe). \\[5pt]
+Więc istotnie taka funkcja jest dobrze określona. Teraz rozważmy złożenie: $(h \circ f) (x) = h(f(x)) = g(x)$ (ponieważ $f(x) \in \mathrm{im} f$), więc wykazaliśmy istnienie takiej funkcji $h$.
+\\[10pt]
+$(\Longleftarrow)$ Załóżmy, że istnieje pewne przekształcenie liniowe $h \colon Y \to Z$ spełniające $g = h \circ f$. Teraz weźmy dowolny element $x' \in X$, taki że $x' \in \ker f$. Jeżeli rozważymy $g(x')$ to otrzymamy:
+$$g(x') = h(f(x')) = h(0) = 0$$
+Ponieważ każde przekształcenie liniowe przekształca 0 na 0. Więc $x' \in \ker g$. \\
+Z tego wnioskujemy $\ker f \subseteq \ker g$. \qed
+
+\vspace{20pt}
+
+\textbf{Zadanie 4:} \\[10pt]
+zJeśli $X = U \oplus V$, to wiemy, że dowolny $x \in X$ można zapisać jednoznacznie jako $x = u + v$ gdzie $u \in U$ oraz $v \in V$. Weźmy przekształcenie liniowe $h$ spełniającą warunki zadania, i sprawdźmy jego wartość dla $x$:
+$$h(x) = h(u + v) = h(u) + h(v) = f(u) + g(v)$$
+Więc okazuje się, że każda wartość funkcji $h(x)$ jest jednoznacznie wyznaczona przez wartości funkcji $f(u)$ i $g(v)$ dla argumentów jednoznacznie wyznaczonych przez początkowy argument $x$. Jako że funkcje $f$ i $g$ są ustalone, to istnieje tylko jedno takie przekształcenie liniowe $h$. \qed
+\end{document}

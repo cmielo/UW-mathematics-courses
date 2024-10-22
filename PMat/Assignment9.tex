@@ -1,0 +1,82 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={6.5in, 10in}]{geometry}
+\pagestyle{empty}
+
+\usepackage{float}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{PMat - praca domowa z dnia 11.12.2023}
+\author{Gracjan Barski, album: 448189}
+\date{February 02, 2024}
+
+
+\begin{document}
+\maketitle
+\textbf{Zadanie 409:} \\[10pt]
+Najpierw pokażmy, że "$\preceq$" jest porządkiem częściowym. \\[5pt]
+\begin{enumerate}[1)]
+    \item Zwrotność: Weźmy $f \in \N^\N$. Wiadomo, że zachodzi $\Forall_{n \in \N} f(n) \leq f(n)$, więc $f \preceq f$.
+    \item Antysymetria: Weźmy $f, g \in \N^\N$ takie że $f \preceq g$ i $g \preceq f$. Z tego mamy:
+    $$\Forall_{n \in \N} \; f(n) \leq g(n) \land \Forall_{n \in \N} \; g(n) \leq f(n)$$
+    Z komutywności kwantyfikatora ogólnego i koniunkcji otrzymujemy:
+    $$\Forall_{n \in \N} \; f(n) \leq g(n) \land g(n) \leq f(n)$$
+    Czyli
+    $$\Forall_{n \in \N} f(n) = g(n)$$
+    Więc wnioskujemy $f = g$.
+    \item Przechodniość: Weźmy $f, g, h \in \N^\N$ takie że $f \preceq g$ i $g \preceq h$. Z tego mamy:
+    $$\Forall_{n \in \N} \; f(n) \leq g(n) \land \Forall_{n \in \N} \; g(n) \leq h(n)$$
+    Z komutywności kwantyfikatora ogólnego i koniunkcji otrzymujemy:
+    $$\Forall_{n \in \N} \; f(n) \leq g(n) \land g(n) \leq h(n)$$
+    Z przechodniości relacji "$\leq$":
+    $$\Forall_{n \in \N} f(n) \leq h(n)$$
+    Więc $f \preceq h$.
+\end{enumerate}
+Więc mamy porządek częściowy. \\[10pt]
+Weźmy funkcję $f \in \N^\N$ określoną wzorem $f = \lambda n. \; 0$. Weźmy dowolną funkcję $g \in \N^\N$. Zachodzi $\Forall_{n \in \N} \; g(n) \geq 0$ ponieważ przeciwdziedziną funkcji $g$ jest $\N$. Z tego otrzymujemy:
+$$\Forall_{n \in \N} \; f(n) \leq g(n)$$
+Czyli $f$ jest "mniejsze" od każdego elementu $\N^\N$, czyli jest w tym porządku elementem najmniejszym, a co za tym idzie jest też jedynym elementem minimalnym. \\[10pt]
+Teraz pokażę, że nie istnieje element maksymalny. \\[5pt]
+Załóżmy niewprost, że istnieje element maksymalny. Weźmy $f \in \N^\N$ które jest elementem maksymalnym. Z definicji to znaczy:
+\begin{align}
+\Forall_{g \in \N^\N} \; f \preceq g \Longrightarrow f = g
+\end{align}
+Ale jeśli weźmiemy funkcję $g \in \N^\N$ określoną wzorem $g = \lambda n. f(n) + 1$ to taka funkcja $g$, łamie warunek \textbf{(1)}, ponieważ $f \preceq g \land f \neq g$. więc sprzeczność, a to oznacza, że funkcja maksymalna nie istnieje. Co za tym idzie, nie istnieje również element maksymalny. \\[10pt]
+Teraz nieskończony łańcuch w tym porządku: Weźmy zbiór:
+$$\{ \lambda n. k  \mid k \in \N\}$$
+Jest to zbiór wszystkich funkcji stałych w $\N^\N$. Niewątpliwie są one wszystkie ze sobą porównywalne, ponieważ ten zbiór jest trywialnie izomorficzny ze zbiorem  $\left\langle \N , \leq \right\rangle$, który jest łańcuchem. \newpage
+Teraz nieskończony antyłańcuch: Zdefiniujmy funkcję $f_k$:
+$$f_k = \lambda n. \; \mathtt{if} \; n == k \; \mathtt{then} \; 1 \; \mathtt{else} \; 0$$
+Weźmy zbiór tych funkcji:
+$$A = \{ f_k \mid k \in \N \}$$
+Oczywiste, że ten zbiór jest nieskończony. Weźmy dowolne $f_k, f_l \in A$ takie, że $k \neq l$. Teraz rozpatrzmy wartości funkcji w $k, l$:
+$$f_k(k) = 1 \geq 0 = f_l(k)$$
+oraz
+$$f_k(l) = 0 \leq 1 = f_l(l)$$
+Więc oczywiście nie zachodzi $f_k \preceq f_l$ ani $f_l \preceq f_k$. Więc wszystkie dowolne pary nie są porównywalne, więc jest to antyłańcuch. \\[10pt]
+Nie jest to liniowy porządek, ponieważ istnieją elementy które nie są ze sobą porównywalne, chociażby $f_1$ i $f_2$ (jak pokazano powyżej). W skrypcie stoi, że porządek gęsty jest liniowy, jednak w niektórych innych źródłach stoi, że nie musi on być liniowy, więc rozpatrzę gęstość tego porządku: \\[5pt]
+Weźmy takie dwie funkcje $f, f_0 \in \N^\N$ takie że $f = \lambda n. \; 0$. Jasne jest, że $f \preceq f_0$. Jedyne co rozróżnia te dwie funkcje to wartość w $n = 0$, i różni się ona tylko o 1, dla pozostałych argumentów są takie same, więc nie istnieje żadna funkcja $g$ spełniająca $(f \preceq g \land g \preceq f_0 \land g \neq f \land g \neq f_0)$. Wnioskujemy, że porządek nie jest gęsty. \qed
+
+\vspace{20pt}
+
+Teraz zadanie dodatkowe. Mamy relację funkcji częściowych $\langle\N \rightharpoonup \N, \preceq \rangle$:
+$$f \preceq g \Longleftrightarrow \Forall_{n \in \mathrm{dom}(f)} \; x \in \mathrm{dom}(g) \land f(x) = g(x)$$
+Czyli $f$ i $g$ są ze sobą w relacji gdy $\mathrm{dom}(f) \subseteq \mathrm{dom}(g)$ oraz wartości w $\mathrm{dom}(f)$ są takie same. Musimy znaleźć maksymalny łańcuch w tym porządku, który jest izomorficzny z $\langle [0; 1], \leq \rangle$. Wiemy, że izomorfizm wymaga, aby zbiory miały taką samą moc. $|[0; 1]| = \cont$. Sprawdźmy jaką ma moc dowolny maksymalny łańcuch w danym porządku. \\[5pt]
+Jasne jest, że najmniejszy element tego łańcucha to funkcja, której dziedziną jest zbiór pusty, więc będzie to też najmniejszy element w poszukiwanym łańcuchu maksymalnym. Jasnym jest też, że elementy maksymalne, to wszystkie funkcje, których dziedzina to $\N$. Więc w łańcuchu może być tylko jedna taka funkcja, i będzie elementem największym. Nasze poszukiwania maksymalnego łańcucha funkcji w tym porządku sprowadzają się do poszukiwania maksymalnego łańcucha w $\langle \Pows (\N), \subseteq \rangle$, ponieważ wartości funkcji nie grają roli, muszą być takie same we wszystkich dziedzinach, więc mamy jeden wybór. Rozpatrujmy takie funkcje $f_X \colon X \to \N$ określone wzorami $f_X = \lambda n. \; 0$\\[5pt]
+Skoro mamy już ustalony element najmniejszy  ($f_\varnothing$), to następna funkcja w łańcuchu musi mieć dziedzinę, która różni się od poprzedniej o co najmniej jeden element, więc weźmy taką, która różni się o jeden, na przykład $A = \{0 \}$. Istotnie $f_\varnothing \preceq f_A$. Analogicznie, następna funkcja, też musi różnić się o co najmniej jeden element w dziedzinie, aby być w relacji z poprzednimi i być różną. Weźmy za dziedzinę zbiór $B = \{ 0, 1\}$. Istotnie $f_\varnothing \preceq f_B$ oraz $f_A \preceq f_B$. Można kontynuować takie działanie aż otrzymamy $f_\N$. I wtedy jasne jest, że moc takiego łańcucha jest równa $\aleph_0$. Więc izomorfizm pomiędzy takim łańcuchem a $\langle [0; 1], \leq \rangle$ nie istnieje. Innym argumentem za tym że taki izomorfizm nie istnieje, może być fakt, że taki żaden maksymalny łańcuch w tym porządku nie jest gęsty (na przykład pomiędzy $f_\varnothing$ i $f_{\{0\}}$ nie istnieje żadna inna funkcja pomiędzy), a łańcuch $\langle [0; 1], \leq \rangle$ jest trywialnie gęsty.
+\end{document}

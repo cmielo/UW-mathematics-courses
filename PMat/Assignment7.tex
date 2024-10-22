@@ -1,0 +1,55 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{Pmat - praca domowa z dnia 4.12.2023}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+\begin{document}
+\maketitle
+\onehalfspacing
+\begin{center}
+    W poniższych rozumowaniach moc zbioru oznaczam modułami, to znaczy moc zbioru $A$ to $|A|$, oraz zaliczam $0$ do liczb naturalnych.
+\end{center}
+\textbf{Zadanie 323:}
+\begin{enumerate}[1)]
+    \item Jakiej mocy jest zbiór $\Pows (\N)/_r$? \\[5pt]
+    Najpierw zauważmy, że $\varnothing \; r \; \varnothing$ oraz że $[\varnothing]_r = \{\varnothing\}$ ponieważ zbiór pusty to jedyny podzbiór $\N$ który nie posiada elementu najmniejszego. Więc (jak się okaże poniżej) jest to jedyna klasa abstrakcji która nie jest jednoznacznie określona przez liczbę naturalną. \\[5pt]
+    Rozważmy funkcję $f \colon \N \to (\Pows (\N)/_r - \{[\varnothing]_r\})$ określoną wzorem $f(n) = [\{n\}]_r$. Przeciwdziedzina może wydawać się dziwna, ale ustalenie takiej jest zasadne, ponieważ $[\varnothing]_r$ to jedyna klasa abstrakcji której nie otrzymamy z takiej funkcji. Wykażmy własności tej funkcji:
+    \begin{enumerate}
+        \item Iniektywność: Weźmy takie $n_1, n_2 \in \N$ że $n_1 \neq n_2$ oraz rozważmy wartości $f(n_1)$ i $f(n_2)$. Mamy:
+        \begin{align*}
+            f(n_1) = [\{n_1\}]_r \\
+            f(n_2) = [\{n_2\}]_r
+        \end{align*}
+        Relacja $r$ jest relacją równoważności (w szczególności jest zwrotna), więc do $f(n_1)$ należy zbiór $\{n_1\}$. Wiemy że $f(k)$ to zbiór wszystkich podzbiorów $\N$ takich że ich minimum to $k$. Łącząc to z warunkiem $n_1 \neq n_2$ wnioskujemy że $\{n_1\} \notin f(n_2)$, ponieważ minimum zbioru $\{n_1\}$ to $n_1$, więc z definicji nierówności zbiorów istotnie $f(n_1) \neq f(n_2)$. 
+        \item Surjektywność: Weźmy dowolną klasę abstrakcji $X \in \Pows (\N)/_r$. Warto zaznaczyć, że $X$ jest rodziną podzbiorów $\N$ ($X \subseteq \Pows (\N)$). Wszystkie elementy w $X$ mają taką własność, że ich minimum to pewna ustalona liczba $a_0 \in \N$, czyli $\Forall_{x \in X} \; \min x = a_0$. Wnioskujemy: $f(a_0) = X$. Więc istotnie $f$ jest surjekcją.
+    \end{enumerate}
+    Więc $f$ jest bijekcją, a co za tym idzie moce zbiorów $\N$ i $\Pows (\N)/_r - \{[\varnothing]_r\}$ są takie same. Zauważmy, że $\Pows (\N)/_r = (\Pows (\N)/_r - \{[\varnothing]_r\}) \cup \{[\varnothing]_r\}$ Więc mamy $|\Pows (\N)/_r| = |\N| + 1$ (ponieważ zbiór $\Pows (\N)/_r - \{[\varnothing]_r\}$ nie zawiera $[\varnothing]_r$). Z tego i z operacjach na liczbach kardynalnych otrzymujemy: $|\Pows (\N)/_r| = \aleph_0$. \qed
+    
+    \item Jakiej mocy są poszczególne klasy abstrakcji?
+    Z rozumowania powyżej wiemy już że $|[\varnothing]_r| = 1$. Każda pozostała klasa abstrakcji jest unikalnie zdefiniowana przez liczbę naturalną $n$ (z podpunktu (1)). Więc rozważmy funkcję $f_n \colon (\Pows (\N) - \{\varnothing \} ) \to [\{n\}]_r$ dla $n \in \N$ opisaną wzorem:
+    $$f_n(A) = \{a + n + 1 \mid a \in A\} \cup \{n\}$$
+    Ta funkcja jest iniekcją: 
+    Weźmy dowolne $A_1, A_2 \in \Pows (\N)$ takie że $A_1 \neq A_2$. Jeśli do każdego elementu z tych zbiorów dodam $n + 1$, to jest to po prostu przesunięcie wartości w tych zbiorach i one nadal nie są równe. Ponadto żaden z tych zbiorów nie zawiera elementu $n$, ponieważ do każdego elementu dodaliśmy $n + 1$, a najmniejszy możliwy element w pierwotnych zbiorach $A_1, A_2$ to $0$, więc możemy dostać co najwyżej $n + 1$. Z tego wnioskujemy że jeśli do obu zbiorów "dorzucę" $n$ to nadal nie będą równe. Więc $f_n$ jest iniekcją. \\[5pt]
+    Z tego wnioskuję $|[\{n\}]_r| \geq \cont$ dla dowolnego $n \in \N$ (ponieważ $|(\Pows (\N) - \{\varnothing \} )| = \cont$). \\[10pt]
+    Teraz rozważę funkcję $g_n \colon [\{n\}]_r \to \Pows (\N)$ opisaną wzorem $g_n(A) = A$ dla każdego $n \in \N$. Oczywistym jest, że jest to iniekcja (ponieważ każda identyczność to iniekcja), więc otrzymuję $|[\{n\}]_r| \leq \cont$. \\[5pt]
+    Z twierdzenia Cantora - Bernesteina $\Forall_{n \in \N} \; |[\{n\}]_r| = \cont$. \qed
+\end{enumerate}
+\end{document}

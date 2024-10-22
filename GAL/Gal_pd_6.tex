@@ -1,0 +1,117 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{GAL - praca domowa 6. z dnia 12.12.2023}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+\begin{document}
+\maketitle
+% \onehalfspacing
+\textbf{Rozwiązanie:} \\[10pt]
+Mamy odwzorowanie $F \colon \R^{2,3} \to \R[x]_3$ dane wzorem
+$$F(A)(x) = [1 \hspace{7pt} x] \cdot A \cdot \begin{bmatrix}
+    1 \\
+    x \\
+    x^2
+\end{bmatrix}$$
+\begin{enumerate}[(a)]
+    \item Pokazać liniowość przekształcenia $F$. Najpierw pokażę addytywność:
+    \begin{align}
+        F(A + B)(x) &= [1 \hspace{7pt} x] \cdot (A + B) \cdot \begin{bmatrix}
+        1 \\
+        x \\
+        x^2
+        \end{bmatrix} \\
+        &= [1 \hspace{7pt} x] \cdot A \cdot \begin{bmatrix}
+    1 \\
+    x \\
+    x^2
+    \end{bmatrix} + [1 \hspace{7pt} x] \cdot B \cdot \begin{bmatrix}
+        1 \\
+        x \\
+        x^2
+    \end{bmatrix} \\
+    &= F(A)(x) + F(B)(x)
+    \end{align}
+    Gdzie równość \textbf{(2)} wynika z rozdzielności mnożenia względem dodawania w pierścieniu macierzy $R^{n,m}$. Więc mamy addytywność przekształcenia. \\[5pt]
+    Teraz mnożenie przez skalar z $\R$:
+    \begin{align}
+        F(\alpha A)(x) &= [1 \hspace{7pt} x] \cdot \alpha A \cdot \begin{bmatrix}
+    1 \\
+    x \\
+    x^2
+    \end{bmatrix} \\
+    &= \alpha F(A)(x)
+    \end{align}
+    Gdzie równość \textbf{(5)} wynika z przemienności mnożenia macierzy przez skalary. Więc mamy liniowość przekształcenia $F$.
+
+    \item Znaleźć bazę $\ker A$. Weźmy dowolne $A \in \R^{2,3}$ i zapiszmy:
+    $$A = \begin{bmatrix}
+        a & b & c \\
+        d & e & f
+    \end{bmatrix}$$
+    Gdzie $a, b, c, d, e, f \in \R$. Teraz chcemy $F(A)(x) = 0$ (0 to zero w pierścieniu wielomianów czyli wielomian zerowy). Mamy:
+    \begin{align}
+        F(A)(x) &= [1 \hspace{7pt} x] \cdot \begin{bmatrix}
+        a & b & c \\
+        d & e & f
+    \end{bmatrix} \cdot \begin{bmatrix}
+    1 \\
+    x \\
+    x^2
+    \end{bmatrix} \\
+    &= a + (b+d)x + (c+e)x^2 + fx^3 = 0
+    \end{align}
+    Gdzie równość \textbf{(6)} jest prawdziwa wtedy i tylko wtedy gdy wszystkie współczynniki otrzymanego wielomianu są zerowe, więc:
+    $$a = 0 \land b = -d \land c = -e \land f = 0$$
+    Wszystkie macierze spełniające te warunki są w $\ker A$ więc bazą może być na przykład zbiór:
+    $$\left\{ \begin{bmatrix}
+        0 & 1 & 0 \\
+        -1 & 0 & 0
+    \end{bmatrix}, \begin{bmatrix}
+        0 & 0 & 1 \\
+        0 & -1 & 0
+    \end{bmatrix} \right\}$$
+    
+    \newpage
+    \item Znaleźć $V$. Weźmy takie $V \subset \R^{2,3}$, którego bazą $V$ jest
+    $$\left\{ \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 0 & 0
+    \end{bmatrix}, \begin{bmatrix}
+        0 & 0 & 0 \\
+        1 & 0 & 0
+    \end{bmatrix}, \begin{bmatrix}
+        0 & 0 & 0 \\
+        0 & 1 & 0
+    \end{bmatrix}, \begin{bmatrix}
+        0 & 0 & 0 \\
+        0 & 0 & 1
+    \end{bmatrix}\right\}.$$
+    Wtedy mamy równość:  
+    $$F\mid_V\left(\begin{bmatrix}
+    d & 0 & 0 \\
+    c & b & a
+    \end{bmatrix}\right)(x) = ax^3 + bx^2 + cx + d$$
+    Gdzie $a, b, c, d \in \R$ to współczynniki kombinacji liniowej bazy $V$. \\[5pt]
+    Trywialnie jest to izomorfizm, ponieważ jeśli zmienimy jakikolwiek współczynnik przy którymś elemencie z bazy, to któryś jego współczynnik będzie inny, bo współczynniki wielomianu są równe współczynnikom kombinacji liniowej macierzy z bazy, a więc będzie to inny wielomian. Więc mamy iniektywność. \\[5pt]
+    Jeśli chcemy otrzymać dowolny wielomian to wystarczy jego współczynniki dać jako odpowiednie współczynniki w kombinacji liniowej bazy $V$, więc mamy surjektywność. A z tego mamy izomorfizm. \qed
+\end{enumerate}
+\end{document}

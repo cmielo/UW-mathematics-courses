@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={6.5in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\PowS}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+\newcommand{\al}{\alpha}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{GAL - praca domowa z dnia 21.11.2023}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+\begin{document}
+\maketitle
+\begin{center}
+W przestrzeni liniowej $f\colon (-2, 2) \to \R$ nad ciałem $\R$ rozważamy funkcje
+\begin{align*}
+f_1(x) = 1, \hspace{15pt} f_2(x) = x, \hspace{15pt} f_3(&x) = \frac{1}{x-2}, \hspace{15pt} f_4(x) = \frac{1}{x+2}, \\  \hspace{15pt} f_5(x) = \frac{1}{x^2-4},& \hspace{15pt} f_6(x) = \frac{x}{x^2-4}
+\end{align*}
+Wyznacz bazy podprzestrzeni liniowych
+$$U = \mathrm{span}(f_1,f_2,f_3,f_4,f_5,f_6)$$
+oraz
+$$V = \{f \in U \mid f(-1) - f(1) = f(0) = 0\}.$$
+\end{center}
+\textbf{Rozwiązanie:} \\[10pt]
+Najpierw baza $U$. Trzeba sprawdzić czy podane funkcje są liniowo niezależne nad $\R$. Najpierw zauważę, że $f_3 + f_4 = 2 \cdot f_6$, czyli funkcje $f_3, f_4, f_6$ są liniowo zależne. Więc mogę usunąć $f_6$  z szukanej bazy. Następnie: $f_3 - f_4 = 4 \cdot f_5$, więc analogicznie usuwam $f_5$ z szukanej bazy. Teraz wystarczy pokazać, że $f_1, f_2, f_3, f_4$ są liniowo niezależne. \\[10pt]
+Rozważmy kombinację liniową i przyrównajmy do 0 (gdzie 0 to wektor zerowy, to znaczy funkcja $g \colon (-2, 2) \to \R$ zadana wzorem $g(x) = 0$): 
+$$\al_1 + \al_2 x + \al_3 \frac{1}{x-2} + \al_4 \frac{1}{x+2} = 0$$
+Teraz wspólny mianownik po lewej $\ldots$
+$$\frac{\al_1 (x^2-4) + \al_2 (x^3-4x) + (\al_3 + \al_4)x + 2\al_3 + 2\al_4}{x^2-4} = 0$$
+Więc licznik musi być równy $0$. Przekształcając licznik mamy:
+$$\al_2 x^3 + \al_1 x^2 + (\al_3+\al_4 - 4\al_2)x + (2\al_3 - 2\al_4 - 4\al_1) = 0$$
+Wiadomo że współczynniki jednoznacznie wyznaczają wielomian, więc mamy:
+\begin{align*}
+    \al_2 &= 0 \\
+    \al_1 &= 0 \\
+    \al_3 + \al_4 - 4\al_2 &= 0 \\
+    2\al_3 - 2\al_4 - 4\al_1 &= 0 \\
+\end{align*}
+Z tego wnioskujemy $\al_1 = \al_2 = \al_3 = \al_4 = 0$. Więc faktycznie układ funkcji $f_1, f_2, f_3, f_4$ jest liniowo niezależny. Z wykładu wiadomo że jeśli układ rozpinający daną przestrzeń jest minimalnym układem liniowo niezależnym w tej przestrzeni, to układ jest bazą tej przestrzeni, więc wnioskujemy że jest to baza $U$. \\[35pt] 
+Teraz baza $V$. \\[5pt]
+Wiemy że $V$ ma być podprzestrzenią liniową $U$, więc wszystko co należy do $V$, należy też do $U$. Stąd:
+$$g \in V \Longrightarrow g = \al_1 + \al_2 x + \frac{\al_3}{x-2} + \frac{\al_4}{x+2}$$
+Gdzie współczynniki $\al_1, \al_2, \al_3, \al_4$ to pewne elementy $\R$.
+Wiemy też że musi zachodzić:
+$$g(-1) = g(1) \land g(0) = 0$$
+Podstawiając argumenty do funkcji, otrzymujemy układ równań:
+$$\begin{cases}
+    \al_1 - \frac{\al_3}{2} + \frac{\al_4}{2} &= 0 \\
+    2\al_2 - \frac{2\al_3}{3} - \frac{2\al_4}{3} &= 0
+\end{cases}$$
+Zapisując to w postaci macierzy mamy:
+$$ 
+\left[ \begin{array}{c c c c | c}
+    2 & 0 & -1 & 1 & 0 \\
+    0 & 3 & -1 & -1 & 0
+\end{array} \right]
+$$
+Otrzymujemy rozwiązania:
+$$\Vec{\al} = \begin{bmatrix}
+    \half \al_3 - \half \al_4 \\
+    \frac{1}{3} \al_3 + \frac{1}{3}\al_4 \\
+    \al_3 \\
+    \al_4
+\end{bmatrix} = \begin{bmatrix}
+    \half \\
+    \frac{1}{3} \\
+    1\\
+    0
+\end{bmatrix} \al_3 + \begin{bmatrix}
+    -\half \\
+    \frac{1}{3} \\
+    0\\
+    1
+\end{bmatrix} \al_4
+$$
+Gdzie $\al_3, \al_4$ to dowolne elementy z $\R$. Wiadomo że do $V$ należą wszystkie funkcje postaci:
+$$\begin{bmatrix}
+    f_1 & f_2 & f_3 & f_4
+\end{bmatrix} \cdot \Vec{\al}$$
+A bazą przestrzeni rozwiązań $\Vec{\alpha}$ jest $\left\{\begin{bmatrix}
+    3 \\
+    2 \\
+    6\\
+    0
+\end{bmatrix}, \begin{bmatrix}
+    -3 \\
+    2 \\
+    0\\
+    6
+\end{bmatrix}\right\}$ (po przeskalowaniu). Więc bazą przestrzeni $V$ jest $\{g_1, g_2\}$, gdzie:
+\begin{align*}
+    g_1 = 3 + 2x + \frac{6}{x-2} \\
+    g_2 = -3 + 2x + \frac{6}{x+2}
+\end{align*}
+\qed
+\end{document}

@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7.5in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+\newcommand{\tr}{\mathrm{tr}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{GAL - praca domowa 7. z dnia 18.01.2023}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+\begin{document}
+\maketitle
+% \onehalfspacing
+\textbf{Rozwiązanie:}
+\begin{enumerate}[(a)]
+    \item Pokazać, że poniższa funkcja jest iloczynem skalarnym na przestrzeni liniowej $\R^{n,n}$ nad $\R$:
+    $$\langle A, B \rangle = \tr(A^TB)$$
+    Weźmy dowolne $X, Y, Z \in \R^{n,n}$ oraz $\alpha_1, \alpha_2 \in \R$ \\
+    Aby funkcja była iloczynem skalarnym musi mieć następujące własności:
+    \begin{enumerate}[I.]
+        \item $\langle X, \alpha_1 Y + \alpha_2 Z  \rangle = \alpha_1 \langle X, Y \rangle + \alpha_2 \langle X, Z \rangle$ \\[5pt]
+        Teraz pewne przekształcenia:
+        \begin{align*}
+            \langle X, \alpha_1 Y + \alpha_2 Z  \rangle &= \tr(X^T (\alpha_1 Y + \alpha_2 Z)) \\
+            &= \tr(\alpha_1X^TY + \alpha_2 X^TZ) \\
+            &= \alpha_1 \langle X, Y \rangle + \alpha_2 \langle X, Z \rangle
+        \end{align*}
+        Gdzie ostatnie przekształcenie wynika z addytywności i jednorodności operacji śladu macierzy.
+
+        \item $\langle X, Y \rangle = \overline{\langle Y, X \rangle}$ \\[5pt]
+        Tak samo jak wyżej:
+        \begin{align*}
+            \langle X, Y \rangle &= \tr(X^T Y) \\
+            &= \tr((Y^T X)^T) \\
+            &= \tr(Y^T X) \\
+            &= \langle Y, X \rangle \\
+            &= \overline{\langle Y, X \rangle}
+        \end{align*}
+        Gdzie powyższe przekształcenia wynikają z faktu $\tr(A) = \tr(A^T)$ oraz z faktu, że $X,Y \in \R^{n,n}$ więc sprzęganie wyniku nic nie zmienia.
+
+        \item $X \neq 0 \Longrightarrow \langle X, X \rangle > 0$ \\[5pt]
+        $X \neq 0$ więc istnieją takie indeksy $1 \leq i, j \leq n$, takie że $x_{i,j} \neq 0$. \\
+        Oznaczmy $Y = X^TX$ oraz $y_{i,j}$ jako element w i-tym wierszu i j-tej kolumnie tej macierzy, wtedy mamy: $\langle X, X \rangle = \tr (X^TX) = \tr(Y)$. Rozważmy element $y_{i,i}$:
+        $$y_{j, j} = \sum_{k = 1}^n x_{k, j} \cdot x_{k, j} = \sum_{k = 1}^{i - 1} (x_{k, j} \cdot x_{k, j}) + x_{i, j} \cdot x_{i, j} + \sum_{k = i + 1}^{n} (x_{k, j} \cdot x_{k, j}) > 0$$
+        Ostatnia nierówność wynika z $x_{i, j} \neq 0$, a wcześniej indeksy przy $x$ są zamienione ponieważ jedna z macierzy była transponowana. Jeśli $y_{j,j} > 0$ to $\tr(Y) > 0$ \qed
+    \end{enumerate}
+
+    \item Znaleźć rzut ortogonalny $I_n$ na $\mathrm{span}(B_1, B_2, \ldots, B_n)$ \\[10pt]
+    Oznaczmy $B = \mathrm{span}(B_1, B_2, \ldots, B_n)$ Pokażmy, że zbiór $\{B_1, B_2, \ldots, B_n\}$ jest bazą ortogonalną $B$. Rozważmy kombinację liniową:
+    \begin{align*}
+    \alpha_1 B_1 + \alpha_2 B_2 + \ldots + \alpha_n B_n &= 0 \\
+    \begin{bmatrix}
+        \alpha_1 & \alpha_2 & \cdots & \alpha_n \\
+        \alpha_1 & \alpha_2 & \cdots & \alpha_n \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \alpha_1 & \alpha_2 & \cdots & \alpha_n
+    \end{bmatrix} &= 0
+    \end{align*}
+    Z tego wnioskujemy, że $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$, więc układ jest niezależny liniowo, więc jest bazą podprzestrzeni $B$.\\[5pt]
+    Teraz pokażmy, że dla dowolnych $1 \leq i, j \leq n$, takich że $i \neq j$ zachodzi $B_i \perp B_j$. Rozważmy $\langle B_i, B_j \rangle = \tr (B_i^T B_j)$ Chcielibyśmy, aby to było równe 0. Więc suma wyrazów na diagonali musi być równa 0, jednak jak się okaże, każdy wyraz na diagonali jest równy 0. Oznaczmy $X = B_i^T B_j$. Rozpatrzmy dla dowolnego $1 \leq i \leq n$ wyraz $x_{i,i}$:
+    $$x_{i,i} = \sum_{k = 1}^n b_{k, i} \cdot b_{k, i} = 0$$
+    Gdzie ostatnia równość wynika z faktu, że macierze $B_i, B_j$ mają jedynki w innych kolumnach więc nigdy na siebie nie trafią. Więc mamy bazę ortogonalną. Teraz wiemy, że rzut $I_n$ na $B$ jest wyrażony wzorem:
+    $$P_B(I_n) = \sum_{j = 1}^n \frac{\langle B_j, I_n \rangle}{\langle B_j, B_j \rangle} \cdot B_j$$
+    Dla dowolnego $1 \leq j \leq n$ Rozważmy: $\langle B_j, I_n \rangle = \tr(B_j^T I_n) = 1$ co wynika ze struktury macierzy $B_j$ i $I_n$. \\[5pt]
+    Dla dowolnego $1 \leq j \leq n$ Rozważmy: $\langle B_j, B_j \rangle = \tr(B_j^T B_j) = n$ co wynika ze struktury macierzy $B_j$.\\[5pt]
+    Więc otrzymujemy:
+    $$P_B(I_n) = \sum_{k = 1}^n \frac{1}{n}B_j$$
+    Czyli rzut $I_n$ na $B$ to
+    $$\frac{1}{n} \begin{bmatrix}
+        1 & 1 & \cdots & 1 \\
+        1 & 1 & \cdots & 1 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & 1 & \cdots & 1
+    \end{bmatrix}$$
+\end{enumerate}
+
+\end{document}

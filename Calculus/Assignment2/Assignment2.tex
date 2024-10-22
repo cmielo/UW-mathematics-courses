@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{{\bf Zadanie 2 z Analizy Matematycznej dla Informatyków }}
+\author{Autor rozwiązania: Gracjan Barski, album: 448189}
+\date{November 23, 2023}
+
+\begin{document}
+\maketitle
+\textbf{Rozwiązanie:} \\[10pt]
+Najpierw przekształćmy:
+$$x_n = \sqrt{7n+1} - \sqrt{7n} = \frac{1}{\sqrt{7n+1}+\sqrt{7n}}$$
+Teraz, $x_n$ jest malejący:
+$$x_{n+1} - x_n = \frac{1}{\sqrt{7n + 8} + \sqrt{7n + 7}} - \frac{1}{\sqrt{7n+1} + \sqrt{7n}} < 0$$
+Gdzie ostatnia nierówność wynika z $\Forall_{n \in \N} \; \sqrt{7n + 8} + \sqrt{7n + 7} > \sqrt{7n+1} + \sqrt{7n}$. Rozważmy jeszcze zbieżność $x_n$, z operacji arytmetycznych na granicach mamy:
+$$x_n = \frac{1}{\sqrt{7n+1}+\sqrt{7n}} \longrightarrow \frac{1}{\infty + \infty} = 0$$
+Co jeśli $p = 0$? Prawdziwa jest własność $\Forall_{n \in \N} \; x_n \neq 0$, więc $\Forall_{n \in \N} \; x_n^0 = 1$ Więc szukany szereg to $\sum_{n = 0}^\infty (-1)^n$, a wiadomo (z ćwiczeń) że taki szereg jest rozbieżny. Z tego wnioskujemy, że jest bezwzględnie rozbieżny (z kontrapozycji twierdzenia o szeregach bezwzględnie zbieżnych). \\[10pt]
+W pozostałych przypadkach najpierw rozważmy zwykłą zbieżność, a potem zbieżność bezwzględną.
+\begin{enumerate}[1)]
+    \item $p > 0$: Wtedy oczywiście $x_n^p \longrightarrow 0$ (wynika to z tego samego rozumowania co zbieżność $x_n$). Mamy też $x_n^p$ malejący, a to wynika z $x_{n+1} < x_n \Longrightarrow x_{n+1}^p < x_n^p$ (ponieważ funkcja wykładnicza $x ^ p$ jest rosnąca gdy $p$ jest dodatnie). Więc mamy spełnione warunki kryterium Leibniza.\\
+    Z tego wnioskujemy $\sum_{n \in \N}^\infty (-1)^n x_n^p$ zbieżny.
+
+    \item $p < 0$: Rozpatrzmy granicę ciągu $(-1)^n x_n^p$, jeśli zrobimy podstawienie $k = -p$ (wtedy $k > 0$), to otrzymamy:
+    $$(-1)^n x_n^p = (-1)^n (\sqrt{7n+1} + \sqrt{7n})^k$$
+    A ponieważ człon ciągu $(\sqrt{7n+1} + \sqrt{7n})^k \longrightarrow \infty$ dla dowolnego $k > 0$, to ciąg jest rozbieżny (alternuje pomiędzy $\infty$, a $-\infty$). \\[5pt]
+    Więc ciąg nie spełnia koniecznego kryterium zbieżności $\left(\sum_{n = n_0}^\infty a_n \text{ zbieżny} \Longrightarrow a_n \longrightarrow 0\right)$, więc jest rozbieżny, a co za tym idzie rozbieżny bezwzględnie. 
+\end{enumerate}
+Te przypadki wyczerpały wszystkie możliwe wartości $p$, więc teraz zbieżność bezwzględna: \\[5pt]
+Prawdą jest że $\Forall_{n \in \N} \; \Forall_{p \in \R} \; x_n^p > 0$, więc zbieżność bezwzględna sprowadza się do zbieżności $\sum_{n\in\N}^\infty x_n^p$. Poczyńmy obserwację: $x_n^p$ jest asymptotycznie podobne do $\frac{1}{n^{\frac{p}{2}}}$ (dlaczego?). Oba są zawsze niezerowe, a granica ich ilorazu wynosi:
+$$\frac{x_n^p}{\frac{1}{n^{\frac{p}{2}}}} = \left(\frac{n^{\frac{1}{2}}}{\sqrt{7n+1} + \sqrt{7n}}\right)^p = \left(\frac{n^{\frac{1}{2}}}{n^{\frac{1}{2}} \cdot \left(\sqrt{7+\frac{1}{n}} + \sqrt{7}\right)}\right)^p = \left(\frac{1}{\sqrt{7+\frac{1}{n}} + \sqrt{7}}\right)^p \longrightarrow \left(\frac{1}{2\cdot \sqrt{7}} \right)^p \neq 0$$
+Przy czym ostatni brak równości jest prawdziwy dla każdego $p \in \R$, a to oznacza, że faktycznie te ciągi są asymptotycznie podobne. Łącząc to z faktem, że $\frac{1}{n^{\frac{p}{2}}}$ jest zawsze dodatnie, otrzymujemy równoważność pomiędzy zbieżnościami szeregów tych ciągów. Więc wystarczy sprawdzić kiedy $\frac{1}{n^{\frac{p}{2}}}$ jest zbieżne. \\[5pt]
+Z wykładu wiadomo że $\frac{1}{n^k}$ jest zbieżne wtedy i tylko wtedy gdy $k > 1$. Podstawiając szukany ciąg otrzymujemy $\frac{p}{2} > 1$, więc $p > 2$. Gdy $k \leq 1$ (czyli $p \leq 2$) to ciąg jest rozbieżny. \\[10pt]
+Podsumowując:
+\begin{enumerate}
+    \item $p \leq 0$ szereg jest rozbieżny.
+
+    \item $p \in (0; 2]$ szereg jest zbieżny warunkowo.
+
+    \item $p > 2$ szereg bezwzględnie zbieżny.
+\end{enumerate} \qed
+\end{document}

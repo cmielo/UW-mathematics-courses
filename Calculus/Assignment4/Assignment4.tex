@@ -1,0 +1,92 @@
+\documentclass[10pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7.2in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{{\bf Praca domowa z ćwiczeń - Analiza Matematyczna }}
+\author{Gracjan Barski, album: 448189}
+\date{January 20, 2024}
+
+\begin{document}
+\maketitle
+\textbf{Zadanie 1:} \\[10pt]
+Pytanie sprowadza się do poszukiwania ekstremów na przedziale $[-1;1]$. Chcemy, aby wszystkie ekstrema były w przedziale $[-1;1]$. Sprawdźmy wartości na krańcach przedziału, ponieważ one też są ekstremami:
+\begin{align*}
+    T(-1) = -16 + 20 - 5 &= -1 \; \checkmark \\
+    T(1) = 16 - 20 + 5 &= 1 \; \checkmark 
+\end{align*}
+Teraz policzmy wartości w ekstremach.
+$T'(x) = 80x^4 - 60x^2 + 5$. Chcemy $T'(x) = 0$. Jest to warunek wystarczający, ponieważ rozważamy $x \in (-1; 1)$ oraz $T$ jest różniczkowalna. Zróbmy podstawienie $t = x^2$, z założeniem $t \geq 0$. Po skróceniu współczynników mamy $16t^2 - 12t + 1 = 0$ Dostajemy rozwiązania:
+$$t_1 = \frac{3 + \sqrt{5}}{8}, \hspace{20pt} t_2 = \frac{3 - \sqrt{5}}{8}$$
+Obie te wartości są większe od zera, ponieważ $3 > \sqrt{5}$, więc spełniają warunki. Więc poszukiwane miejsca zerowe pochodnej to:
+$$x_1 = \sqrt{t_1} \hspace{20pt}  x_2 = -\sqrt{t_1} \hspace{20pt} x_3 = \sqrt{t_2} \hspace{20pt} x_4 = -\sqrt{t_2}$$
+Wszystkie te wartości są w przedziale $[-1;1]$, więc wystarczy pokazać, że $T(x_1), T(x_2), T(x_3), T(x_4) \in [-1; 1]$, jednak jeśli pokażemy, że $T(x_1), T(x_3) \in [-1; 1]$, to będzie gotowe, ponieważ $T(x)$ jest funkcją nieparzystą, a nasz poszukiwany przedział jest symetryczny względem 0. \\[5pt]
+Rozważmy:
+\begin{align*}
+    T(x_1) &= \sqrt{\frac{3 + \sqrt{5}}{8}} \left(16 \cdot \left(\sqrt{\frac{3 + \sqrt{5}}{8}}\right)^4 - 20 \cdot \left(\sqrt{\frac{3 + \sqrt{5}}{8}}\right)^2 + 5\right) \\
+    &= \sqrt{\frac{3 + \sqrt{5}}{8}} \left(16 \cdot \frac{14 + 6\sqrt{5}}{64} - 20 \cdot \frac{3 + \sqrt{5}}{8} + 5\right) \\
+    &= \sqrt{\frac{3 + \sqrt{5}}{8}} \left(\frac{4 - 4\sqrt{5}}{4}\right) \\
+    &= \sqrt{\frac{3 + \sqrt{5}}{8}} \left(1 - \sqrt{5}\right) \\
+    &= -\sqrt{\frac{3 + \sqrt{5}}{8}} \left(\sqrt{5} - 1\right) \\
+    &= -\sqrt{\frac{3 + \sqrt{5}}{8}} \sqrt{6 - 2\sqrt{5}} \\
+    &= -\sqrt{\frac{18 - 6\sqrt{5} + 6\sqrt{5} - 10}{8}} \\
+    &= -1
+\end{align*} 
+Analogiczne przekształcenia pokażą, że $T(x_3) = 1$. \\[5pt]
+Z nieparzystości $T(x)$ otrzymujemy $T(x_2) = 1$ oraz $T(x_4) = -1$. Więc wykazaliśmy, że jeśli $|x| \leq 1$, to $|T(x)| \leq 1$. \qed
+
+\vspace{80pt}
+
+\textbf{Zadanie 2:} \\[10pt]
+Weźmy dowolną funkcję $g(x)$ monotoniczną rosnącą, ciągłą na $[1; \infty]$, spełniającą $g(1) = 0$.
+Teraz rozważmy funkcję $f$:
+$$f(x) = \begin{cases}
+    g(x) & x \geq 1 \\
+    -g(\frac{1}{x}) & 0 < x \leq 1
+\end{cases}$$
+Pokażę, że funkcja spełnia, żądane warunki. \\[5pt]
+Oczywiście zachodzi $f(1) = 0$. Musi zachodzić również $f(x) = -f(\frac{1}{x})$. Rozpatrzmy dwa przypadki:
+\begin{enumerate}[(1)]
+    \item $x > 1$ \\[5pt]
+    Wtedy $f(x) = g(x)$, oraz $f(\frac{1}{x}) = -g(x)$. Z tych równości otrzymujemy $f(x) = -f(\frac{1}{x})$.
+
+    \item $0 < x < 1$ \\[5pt]
+    Wtedy $f(x) = -g(\frac{1}{x})$, oraz $f(\frac{1}{x}) = g(\frac{1}{x})$. Z tych równości otrzymujemy $f(x) = -f(\frac{1}{x})$.
+\end{enumerate}
+$f$ musi być ciągła. $g$ jest ciągła, oraz składanie funkcji ciągłych zachowuje ciągłość, więc jedyna nieciągłość jaka mogłaby zajść, to w punkcie $x = 1$. Obliczmy granicę:
+$$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} -g\left(\frac{1}{x}\right) = -g\left(\lim_{x \to 1^-} \frac{1}{x}\right) \to -g(1) = 0 = g(1) = f(1)$$
+Więc $\lim\limits_{x \to 1^-} f(x) = f(1)$, więc $f$ jest ciągła na $(0; \infty)$. Teraz sprawdźmy czy $f$ jest rosnące. Dla argumentów $x \geq 1$, sprawa jest oczywista, bo $g$ jest rosnące. Więc weźmy takie $x, y \in \R$, że $0 < x < y < 1$. Rozważmy wartości: $f(x) = -g(\frac{1}{x})$, oraz $f(y) = -g(\frac{1}{y})$. Z założenia, wiemy że $\frac{1}{x} > \frac{1}{y}$, więc z monotoniczności $g$, mamy $g(\frac{1}{x}) > g(\frac{1}{y})$, a mnożąc przez -1 otrzymujemy $-g(\frac{1}{x}) < -g(\frac{1}{y})$ Więc istotnie $f$ jest rosnąca na całej dziedzinie. \\[5pt]
+Pokazaliśmy, że dla dowolnego $g$ spełniającego określone powyżej warunki, funkcja $f$ spełnia warunki zadania, oczywiście takich funkcji $g$ jest nieskończenie wiele oraz mają przeróżne formy, więc wypisywanie wszystkich mija się z celem. \qed
+
+\vspace{20pt}
+
+\textbf{Zadanie 3:} \\[10pt]
+Obserwacja: $a_n - b_n \sqrt{3} = (2 - \sqrt{3})^n$. Wynika to z rozwinięcia $(2 - \sqrt{3})^n$ ze wzoru Newtona (ponieważ $b_n$ to po prostu suma współczynników przy nieparzystych potęgach $\sqrt{3}$, a zmieniając znak przy $\sqrt{3}$, ta suma się nie zmienia). Z tego otrzymujemy:
+$$2a_n = a_n - b_n\sqrt{3} + a_n + b_n\sqrt{3}$$
+A z tego:
+$$a_n = \frac{(2+\sqrt{3})^n + (2 - \sqrt{3})^n}{2}$$
+Wyznaczamy $b_n$:
+$$b_n = \frac{(2+\sqrt{3})^n - a_n}{\sqrt{3}} = \frac{(2+\sqrt{3})^n - (2 - \sqrt{3})^n}{2\sqrt{3}}$$
+Teraz rozważmy granicę:
+\begin{align*}
+    \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \frac{\frac{(2+\sqrt{3})^n + (2 - \sqrt{3})^n}{2}}{\frac{(2+\sqrt{3})^n - (2 - \sqrt{3})^n}{2\sqrt{3}}} \\
+    &= \lim_{n \to \infty} \sqrt{3} \; \frac{(2+\sqrt{3})^n + (2 - \sqrt{3})^n}{(2+\sqrt{3})^n - (2 - \sqrt{3})^n} \\
+    &= \lim_{n \to \infty} \sqrt{3} \; \frac{(2+\sqrt{3})^n \left( 1 + \left(\frac{2 - \sqrt{3}}{2+\sqrt{3}}\right)^n\right)}{(2+\sqrt{3})^n \left(1 - \left(\frac{2 - \sqrt{3}}{2+\sqrt{3}}\right)^n\right)} \to \sqrt{3}
+\end{align*}
+Gdzie ostatni wniosek wynika z tego, że $\left(\frac{2 - \sqrt{3}}{2+\sqrt{3}}\right)^n \to 0$, ponieważ $\frac{2 - \sqrt{3}}{2+\sqrt{3}} = 7 - 4\sqrt{3} \in (0; 1)$. \qed
+
+\end{document}

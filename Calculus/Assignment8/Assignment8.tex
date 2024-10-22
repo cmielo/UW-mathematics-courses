@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace, commath}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{Kolokwium domowe z Analizy 2}
+\author{Gracjan Barski, album: 448189}
+\date{May 25, 2024}
+
+\begin{document}
+\maketitle
+\onehalfspacing
+\textbf{Zad 1:} \\[5pt]
+Wiemy, że $Dg(0)$ istnieje wtw dla każdego $\Vec{v} \in \R^2$ zachodzi:
+$$g(\Vec{v}) - g(0) = Dg(0)(\Vec{v}) + h_0(\Vec{v})$$
+Gdzie $\Dis \lim_{||v|| \to 0} \frac{h_0(\Vec{v})}{||v||} \to 0$. Wystarczy wyznaczyć $\alpha$ dla których ta granica jest równa 0. Oznaczmy $\Vec{v} = [u, v]$.
+$$g(\Vec{v}) - g(0) = 7u + 11v + d(u)(|u|^2 + |v|^2)^\alpha$$
+Teraz mamy dwie opcje:
+\begin{enumerate}[(a)]
+    \item $d(u) = 0$ \\[5pt]
+    Otrzymujemy $Dg(0)(\Vec{v}) = 7u + 11v$ oraz $h_0(\Vec{v}) = 0$, które spełnia żądany warunek.
+
+    \item $d(u) = 1$ \\[5pt]
+    Z jedyności różniczki otrzymujemy $Dg(0)(\Vec{v}) = 7u + 11v$ oraz $h_0(\Vec{v}) = (|u|^2+|v|^2)^\alpha$. Rozważmy poszukiwaną granicę:
+    $$L = \lim_{||v|| \to 0} \frac{h_0(\Vec{v})}{||v||} = \lim_{||v|| \to 0} \frac{(|u|^2+|v|^2)^\alpha}{\sqrt{|u|^2+|v|^2}} = \lim_{||v|| \to 0} (|u|^2+|v|^2)^{\alpha - \half}$$
+    Rozważmy różne przedziały dla $\alpha$:
+    \begin{enumerate}[$1^\circ$]
+        \item $\alpha \in (0; \half)$
+        $$L = \left(\frac{1}{|u|^2+|v|^2}\right)^\beta$$
+        Dla pewnego $\beta \in (0; \half)$, co daje nam $L = \infty$. Wnioskujemy, że dla tych wartości $\alpha$ $Dg(0)$ nie istnieje.
+
+        \item $\alpha = \half$ \\[5pt]
+        Wtedy $L = \lim_{||v|| \to 0} (|u|^2+|v|^2)^0$ = 1. Więc tutaj $Dg(0)$ też nie istnieje. 
+    
+        \item $\alpha > \half$ \\[5pt]
+        Wtedy $L = \lim_{||v|| \to 0} (|u|^2+|v|^2)^\beta$ dla pewnego $\beta \in (0; \infty)$. Oczywiście $L = 0$, więc $Dg(0)$ istnieje i $Dg(0)(\Vec{v}) = 7u + 11v$ 
+    \end{enumerate}
+\end{enumerate}
+$Dg(0)(\Vec{v})$ ma istnieć dla dowolnego $\Vec{v}$, zwłaszcza dla takiego gdy $d(u) = 1$, więc przedział z podpunktu (b) jest ostateczną odpowiedzią. \qed
+
+\newpage
+
+\textbf{Zad 2:} \\[5pt]
+$M$ jest zbiorem zwartym, więc $f$ osiąga swoje kresy z twierdzenia Weierstrassa. \\ 
+Przekształćmy warunki na $M$:
+\begin{align*}
+    y = -x - y \\
+    z^2 + zx + x^2 = \half
+\end{align*}
+Traktujemy $x$ jako parametr i obliczamy $\Delta$:
+$$\Delta = -3x^2+2$$
+Wnioskujemy $x \in \left[-\sqrt{\frac{2}{3}}; \sqrt{\frac{2}{3}}\right]$ oraz $\Dis z = \frac{-x \pm \sqrt{-3x^2+2}}{2}$. \\[5pt]
+Teraz możemy potraktować $f$ jako funkcję jednej zmiennej $x$. Mamy dwa przypadki:
+\begin{enumerate}[(a)]
+    \item $\Dis f(x,y,z) = 2x + z = \frac{3x + \sqrt{-3x^2+2}}{2} = g(x)$. Szukamy przedziałów monotoniczności pochodnej:
+    \begin{align*}
+        g'(x) &\geq 0 \\
+        \frac{3}{2} - \frac{3x}{2\sqrt{-3x^2+2}} &\geq 0 \\
+        \frac{x}{\sqrt{-3x^2+2}} &\leq 1 \\
+        x &\leq \sqrt{-3x^2+2}
+    \end{align*}
+    Dla $x \leq 0$ nierówność jest spełniona, teraz zakładamy $x > 0$ i podnosimy do kwadratu i otrzymujemy:
+    $$x \leq \frac{1}{\sqrt{2}}$$
+    Otrzymujemy maksimum lokalne dla $x_0 = \frac{1}{\sqrt{2}}$, $g(x_0) = \sqrt{2}$.
+    Z warunku $x \geq y$ otrzymujemy $2x + z \geq 0$. Minimum lokalne będzie na skraju dziedziny, który trzeba będzie wyznaczyć z warunku $x \geq y$, czyli $2x + z \geq 0$:
+    $$3x + \sqrt{-3x^2+2} \geq 0$$
+    Dla $x \geq 0$ nierówność zachodzi, więc załóżmy $x < 0$.
+    $$\sqrt{3x^2+2} \geq -3x$$
+    Podnosimy do kwadratu:
+    $$x^2 \leq \frac{1}{6}$$
+    Więc $x \in \left[-\frac{1}{\sqrt{6}}; \sqrt{\frac{2}{3}}\right]$.
+    Szukamy najmniejszej wartości, którą jest $g\left(-\frac{1}{\sqrt{6}}\right) = 0$.
+
+    \item $\Dis f(x,y,z) = 2x + z = \frac{3x - \sqrt{-3x^2+2}}{2} = g(x)$ \\[5pt]
+    Analogiczne przekształcenia jak wyżej prowadzą do minimum lokalnego dla $x_0 = \frac{1}{\sqrt{6}}$, $f(x_0) = 0$ i maksimum lokalnego dla $x_1 = \sqrt{\frac{2}{3}}$, $f(x_1) = \sqrt{\frac{3}{2}}$.
+\end{enumerate}
+Wnioskujemy, że $\sup_M(f) = \sqrt{2}$ oraz $\inf_M(f) = 0$, te kresy są osiągalne.
+
+\end{document}

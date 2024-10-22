@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+    
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, pifont, lipsum}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\title{GAL - praca domowa z dnia 9.11.2023}
+\author{Gracjan Barski, indeks: 448189}
+\date{\today}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PowS}{\mathcal{P}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\pagestyle{empty}
+
+\begin{document}
+\maketitle
+\begin{center}
+Dla danej liczby naturalnej $n$, wyznacz wszystkie macierze $A \in \R^{n, n}$, takie że $A \cdot B = B \cdot A$ dla każdego $B \in \R^{n, n}$.
+\end{center}
+
+\textbf{Rozwiązanie:} \\[10pt]
+Jeśli przyjmiemy że $0 \in \N$, to trzeba taki przypadek rozważyć. Weźmy $n = 0$. Trzeba znaleźć macierz $A \in \R^{0,0}$, która dla każdego $B \in \R^{0,0}$ ma własność $AB = BA$. Warto zaznaczyć, że istnieje tylko jedna macierz w $\R^{0,0}$, a mianowicie macierz pusta, która reprezentuje przekształcenie liniowe ze zbioru pustego w zbiór pusty. Pomnożenie dwóch takich macierzy daje przekształcenie ze zbioru pustego do zbioru pustego do zbioru pustego, więc każde takie przekształcenie będzie spełniało żądaną równość. Więc jeśli $A = [\, ]$ (macierz pusta) to istotnie $AB = BA$ dla każdego $B \in \R^{0,0}$ \\[10pt]
+
+Teraz załóżmy $n > 0$. Weźmy takie $A \in \R^{n,n}$, które spełnia warunek zadania. Najpierw pokażę, że $A$ jest macierzą diagonalną (tzn. taką której wyrazy poza główną przekątną są zerowe).\\
+Rozpatrzmy taką macierz $X_{i,j} \in \R^{n,n}$, która charakteryzuje się tym że jej element $x_{i,j}$ jest równy 1, a pozostałe elementy są równe zero. Z założenia mamy $\Forall_{1 \leq i, j \leq n} \, A \cdot X_{i,j} = X_{i,j} \cdot A$. Czyli musi zachodzić $\Forall_{1 \leq i, j, k, l \leq n} (A \cdot X_{i,j})_{k, l} = (X_{i,j} \cdot A)_{k, l}$. Na razie weźmy dowolne $i \in \N$ takie że $1 \leq i \leq n$ oraz ustalmy $j = i$. Rozpatrzmy przypadek gdzie $k = i$  \\
+Z lewej mamy:
+$$L = (A \cdot X_{i, i})_{i, l} = \sum_{s = 1}^n A_{i, s} \cdot (X_{i, i})_{s, l} = 
+\begin{cases}
+    A_{i, i}; \hspace{10pt} i = l \\
+    0; \hspace{20pt} i \neq l
+\end{cases}$$
+A z prawej:
+$$P = (X_{i, i} \cdot A)_{i, l} = \sum_{s = 1}^n (X_{i, i})_{i, s} \cdot A_{s, l} = A_{i, l}
+$$
+Z tego że $L = P$, wnioskujemy że gdy $i \neq j$, wtedy $A_{i, j} = 0$, w przeciwnym wypadku może być niezerowe. To oznacza że $A$ jest macierzą diagonalną.
+Teraz wystarczy dowieść, że wszystkie elementy z diagonali $A$ są takie same. \\[5pt]
+Znowu wykorzystamy tą samą macierz $X_{i, j}$. Weźmy dowolne $i, j \in \N$, takie że $1 \leq i, j \leq n$. \\
+Mamy z założenia: $A \cdot X_{i, j} = X_{i, j} \cdot A$. Więc $\Forall_{1 \leq k, l \leq n} (A \cdot X_{i, j})_{k, l} = (X_{i, j} \cdot A)_{k, l}$. Rozważmy takie $k, l$, że $k = i$, $l = j$:
+$$L = \sum_{k = 1}^n A_{i, k} \cdot (X_{i, j})_{k, j} = A_{i, i}$$
+Oraz:
+$$P = \sum_{k = 1}^n (X_{i,j})_{i, k} \cdot A_{k, j} = A_{j, j}$$
+Te równości wynikają ze struktury macierzy $X_{i, j}$. Z tego wynika, że $A_{i, i} = A_{j, j}$ dla każdego $1 \leq i, j \leq n$, więc istotnie wszystkie wyrazy $A$ z diagonali są równe, a to oznacza, że $A = c \cdot \mathrm{I}$, gdzie $c \in R$.
+\end{document}

@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts, amssymb, amsmath, amsthm, mathtools, enumerate, latexsym, setspace}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={7in, 10.5in}]{geometry}
+\pagestyle{empty}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prime}{\mathbb{P}}
+\newcommand{\Pows}{\mathcal{P}}
+\newcommand{\cont}{\mathfrak{c}}
+\newcommand{\tr}{\mathrm{tr}}
+
+\newcommand{\Dis}{\displaystyle}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Forall}{{\Large\mbox{$\forall$}}}
+\newcommand{\Exists}{{\Large\mbox{$\exists$}}}
+
+\title{GAL - praca domowa 8.}
+\author{Gracjan Barski, album: 448189}
+\date{\today}
+
+\begin{document}
+\maketitle
+% \onehalfspacing
+\textbf{Rozwiązanie:} \\[10pt]
+Najpierw zauważmy: $-A = A^T$, więc jeśli wykorzystamy własność, że dla każdej macierzy $X \in \R^{n,n}$ zachodzi $\det X = \det X^T$, to dostaniemy $\det A = \det -A$. Weźmy $n$ nieparzyste. Wiemy, że przemnożenie macierzy przez $-1$ mnoży jej wyznacznik razy $(-1)^n$, więc mamy $\det A = - \det A$. Więc dostajemy $\det A = 0$. To był przypadek gdy $n$ nieparzyste. \\[10pt]
+Teraz rozważmy $n$ parzyste. Przekształćmy wyjściową macierz. Na razie będziemy tylko odejmować jedne wiersze od innych więc nie zmieniamy wyznacznika:
+$$
+\begin{bmatrix}
+0 & -1 & -1 & -1 & \cdots & -1 \\
+1 & 0 & -1 & -1 & \cdots & -1 \\
+1 & 1 & 0 & -1 & \cdots & -1 \\
+1 & 1 & 1 & 0 & \cdots & -1 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & 1 & 1 & 1 & \cdots & 0 \\
+\end{bmatrix} 
+\overset{\Forall_{2 \leq i \leq n} \; w_i - w_1}{\sim}
+\begin{bmatrix}
+0 & -1 & -1 & -1 & \cdots & -1 \\
+1 & 1 & 0 & 0 & \cdots & 0 \\
+1 & 2 & 1 & 0 & \cdots & 0 \\
+1 & 2 & 2 & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & 2 & 2 & 2 & \cdots & 1 \\
+\end{bmatrix}
+$$
+Teraz po kolei odejmijmy drugi wiersz od wszystkich poniższych, potem trzeci wierz od wszystkich poniższych, i tak dalej $\ldots$ Otrzymujemy:
+$$
+\begin{bmatrix}
+0 & -1 & -1 & -1 & \cdots & -1 & -1\\
+1 & 1 & 0 & 0 & \cdots & 0 & 0\\
+0 & 1 & 1 & 0 & \cdots & 0 & 0\\
+0 & 0 & 1 & 1 & \cdots & 0 & 0\\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & 0 & \cdots & 1 & 0 \\
+0 & 0 & 0 & 0 & \cdots & 1 & 1 \\
+\end{bmatrix}
+$$
+Wartość wyznacznika tej macierzy jest taka sama jak wyznacznika macierzy wyjściowej, ponieważ jedynie odejmowaliśmy wiersze od siebie. W pierwszej kolumnie mamy same zera oprócz jedynki w drugim wierszu. Skorzystajmy z rozwinięcia Laplace'a względem pierwszej kolumny, aby policzyć wyznacznik:
+$$\det A = -1 \cdot \det 
+\begin{bmatrix}
+-1 & -1 & -1 & \cdots & -1 & -1\\
+1 & 1 & 0 & \cdots & 0 & 0\\
+0 & 1 & 1 & \cdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & 1 & 0 \\
+0 & 0 & 0 & \cdots & 1 & 1 \\
+\end{bmatrix}$$
+Warto zaznaczyć, że ta macierz po prawej, której chcemy policzyć wyznacznik, jest rozmiaru $n - 1 \times n - 1$ (oczywiście rozmiar się zmniejszył przez zastosowanie rozwinięcia Laplace'a). Więc jest to macierz o nieparzystej liczbie wierszy i kolumn (ponieważ jesteśmy w przypadku $n$ parzyste). Teraz, jeśli spróbujemy wyzerować pierwszy wiesz, to okaże się, że zostanie nam $-1$ na pierwszym miejscu tego wiersza. Możemy to uzyskać poprzez dodanie ostatniego ($n - 1$-tego) wiersza do pierwszego, potem dodanie $n - 3$-tego wiersza, i tak dalej. Za każdym razem usuwamy dwie $-1$ z pierwszego wiersza, ale ich jest nieparzyście wiele, więc zostanie jedna na początku. Finalnie otrzymamy taką macierz:
+$$
+\begin{bmatrix}
+-1 & 0 & 0 & \cdots & 0 & 0\\
+1 & 1 & 0 & \cdots & 0 & 0\\
+0 & 1 & 1 & \cdots & 0 & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & 1 & 0 \\
+0 & 0 & 0 & \cdots & 1 & 1 \\
+\end{bmatrix}
+$$
+Która jest trójkątna. Oczywiście wyznacznik macierzy trójkątnej jest równy iloczynowi elementów na diagonali, który w tym przypadku wynosi $-1$. Podstawiając do wcześniejszej formuły otrzymujemy:
+$$\det A = -1 \cdot -1 = 1$$
+W dowodzie zostały użyte macierze "duże" (to znaczy 
+$n \geq 5$), więc gdyby ktoś miał wątpliwości, czy ta metoda działa dla macierzy "małych" (to znaczy $2 \leq n \leq 4$), to ten rezultat również sprawdza się dla tych "małych" i można to łatwo sprawdzić ręcznie. \qed 
+\end{document}
